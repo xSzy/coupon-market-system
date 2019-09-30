@@ -20,4 +20,13 @@ public class Constant
 	public static final int VALUE_TYPE_VND = 2;
 	public static final int VALUE_TYPE_USD = 3;
 	public static final int VALUE_TYPE_OTHER = 4;
+	
+	//response constant
+	public static final String STATUS_ERROR = "error";
+	public static final String STATUS_SUCCESS = "success";
+	public static final int VALIDATION_FAILED = -1;
+	
+	//exceptions
+	public static final String EXCEPTION_ACCOUNT_EXISTS = "username exists";
+	public static final String EXCEPTION_INCORRECT_LOGIN = "wrong username or password";
 }

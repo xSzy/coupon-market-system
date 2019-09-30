@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "tblAccount")
@@ -18,10 +20,11 @@ public class Account
 	@Column(name = "id")
 	private int id;
 
+	@NotBlank(message = "username cannot be blank")
 	@Column(name = "username", unique = true)
 	private String username;
 
-	@JsonIgnore
+	@NotBlank(message = "password cannot be blank")
 	@Column(name = "password")
 	private String password;
 
@@ -38,11 +41,13 @@ public class Account
 		this.username = username;
 	}
 
+	@JsonIgnore
 	public String getPassword()
 	{
 		return password;
 	}
 
+	@JsonProperty
 	public void setPassword(String password)
 	{
 		this.password = password;
