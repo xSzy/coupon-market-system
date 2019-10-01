@@ -10,4 +10,6 @@ public interface UserService
 	public User register(Account account) throws Exception;
 
 	public User login(Account account) throws Exception;
+
+	public User update(User user) throws Exception;
 }
