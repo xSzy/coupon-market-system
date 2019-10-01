@@ -32,6 +32,32 @@ public class Category
 
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "descriptionEnglish")
+	private String descriptionEnglish;
+	
+	@Column(name = "isTopCategory")
+	private boolean topCategory;
+
+	public boolean isTopCategory()
+	{
+		return topCategory;
+	}
+
+	public void setTopCategory(boolean topCategory)
+	{
+		this.topCategory = topCategory;
+	}
+
+	public String getDescriptionEnglish()
+	{
+		return descriptionEnglish;
+	}
+
+	public void setDescriptionEnglish(String descriptionEnglish)
+	{
+		this.descriptionEnglish = descriptionEnglish;
+	}
 
 	public int getId()
 	{

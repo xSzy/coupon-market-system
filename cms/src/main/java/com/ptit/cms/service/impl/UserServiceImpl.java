@@ -48,5 +48,19 @@ public class UserServiceImpl implements UserService
 		User user = userDao.getUserByAccount(account);
 		return user;
 	}
+
+	@Override
+	public User update(User user) throws Exception
+	{
+		try
+		{
+			user = userDao.save(user);
+		}
+		catch (Exception e)
+		{
+			throw new Exception(e.getMessage());
+		}
+		return user;
+	}
 	
 }

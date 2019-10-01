@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,6 +26,7 @@ public class User
 	@Column(name = "id")
 	private int id;
 
+	@NotNull(message = "account cannot be null")
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "accountId")
 	private Account account;
@@ -36,6 +39,10 @@ public class User
 
 	@Column(name = "dob")
 	private Date dob;
+	
+	@Email(message = "not a valid email format")
+	@Column(name = "email")
+	private String email;
 
 	@Column(name = "address")
 	private String address;
@@ -151,6 +158,16 @@ public class User
 	public void setRole(int role)
 	{
 		this.role = role;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
 	}
 
 }
