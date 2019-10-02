@@ -12,9 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tblCoupon")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Coupon
 {
 	
@@ -23,28 +28,34 @@ public class Coupon
 	@Column(name = "id")
 	private int id;
 	
+	@NotNull
 	@Column(name = "title")
 	private String title;
 	
+	@NotNull
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "productId")
 	private Product product;
 	
+	@NotNull
 	@Column(name = "type")
 	private int type;
 	
 	@Column(name = "expiredate")
 	private Date expireDate;
 	
+	@NotNull
 	@Column(name = "value")
 	private double value;
 	
+	@NotNull
 	@Column(name = "valuetype")
 	private int valueType;
 	
 	@Column(name = "description")
 	private String description;
 	
+	@JsonIgnore
 	@Column(name = "clickCount")
 	private int clickCount;
 	

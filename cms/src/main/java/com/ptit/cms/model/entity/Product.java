@@ -12,8 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "tblProduct")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product
 {
 
@@ -28,7 +31,7 @@ public class Product
 	@Column(name = "manufacturer")
 	private String manufacturer;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "productId")
 	private List<ProductImage> productImages;
 

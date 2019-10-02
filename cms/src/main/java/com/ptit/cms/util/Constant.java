@@ -2,6 +2,9 @@ package com.ptit.cms.util;
 
 public class Constant
 {
+	//settings
+	public static final String IMAGE_UPLOAD_PATH = "C:\\CMS\\images\\";
+	
 	//gender
 	public static final int GENDER_MALE = 1;
 	public static final int GENDER_FEMALE = 2;
@@ -29,4 +32,6 @@ public class Constant
 	//exceptions
 	public static final String EXCEPTION_ACCOUNT_EXISTS = "username exists";
 	public static final String EXCEPTION_INCORRECT_LOGIN = "wrong username or password";
+	public static final String EXCEPTION_FILE_CORRUPT = "file corrupted";
+	
 }
