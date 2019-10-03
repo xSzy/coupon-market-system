@@ -195,4 +195,51 @@ public class CouponController
 		return new ResponseEntity<ResponseModel>(response, listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/coupon/update", method = RequestMethod.POST)
+	public ResponseEntity<ResponseModel> updateCoupon(@Valid @RequestBody Coupon coupon)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		Coupon newCoupon = null;
+		try
+		{
+			newCoupon = couponService.updateCoupon(coupon);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(newCoupon);
+		return new ResponseEntity<ResponseModel>(response, newCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/delete", method = RequestMethod.POST)
+	public ResponseEntity<ResponseModel> deleteCoupon(@RequestBody Coupon coupon)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		boolean result = false;
+		try
+		{
+			result = couponService.deleteCoupon(coupon);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(result);
+		return new ResponseEntity<ResponseModel>(response, result == false ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
 }
