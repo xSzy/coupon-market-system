@@ -112,4 +112,13 @@ public class Category
 		this.description = description;
 	}
 
+	public boolean add(Category e)
+	{
+		return subCategory.add(e);
+	}
+
+	public boolean remove(Object o)
+	{
+		return subCategory.remove(o);
+	}
 }

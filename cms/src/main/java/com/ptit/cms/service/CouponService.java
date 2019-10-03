@@ -23,4 +23,8 @@ public interface CouponService
 
 	List<Coupon> getCouponByClickcount(int number) throws Exception;
 
+	Coupon updateCoupon(Coupon coupon) throws Exception;
+
+	boolean deleteCoupon(Coupon coupon);
+
 }
