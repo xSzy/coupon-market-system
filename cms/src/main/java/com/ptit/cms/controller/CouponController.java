@@ -1,0 +1,198 @@
+package com.ptit.cms.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ptit.cms.model.entity.Category;
+import com.ptit.cms.model.entity.Coupon;
+import com.ptit.cms.model.other.ErrorMessage;
+import com.ptit.cms.model.other.ResponseModel;
+import com.ptit.cms.service.CouponService;
+import com.ptit.cms.util.Constant;
+
+@RestController
+@RequestMapping("#{'${rest.base-path}'}")
+public class CouponController
+{
+	@Autowired
+	private CouponService couponService;
+	
+	@RequestMapping(value = "/coupon/create", method = RequestMethod.POST)
+	public ResponseEntity<ResponseModel> createCoupon(@Valid @RequestBody Coupon coupon)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		Coupon newCoupon = null;
+		try
+		{
+			newCoupon = couponService.createCoupon(coupon);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(newCoupon);
+		return new ResponseEntity<ResponseModel>(response, newCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/click", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> couponClick(@RequestParam int couponId)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		boolean result = false;
+		try
+		{
+			result = couponService.updateCouponClickcount(couponId);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(result);
+		return new ResponseEntity<ResponseModel>(response, result == false ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/getAll", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> getAllCoupon()
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		List<Coupon> listCoupon = null;
+		try
+		{
+			listCoupon = couponService.getAllCoupon();
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(listCoupon);
+		return new ResponseEntity<ResponseModel>(response, listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/findByCategory", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> getCouponByCategory(@RequestParam int categoryId)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		List<Coupon> listCoupon = null;
+		try
+		{
+			listCoupon = couponService.getCouponByCategory(categoryId);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(listCoupon);
+		return new ResponseEntity<ResponseModel>(response, listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/getById", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> getCouponById(@RequestParam int couponId)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		Coupon coupon = null;
+		try
+		{
+			coupon = couponService.getCouponById(couponId);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(coupon);
+		return new ResponseEntity<ResponseModel>(response, coupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/findByName", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> getCouponByName(@RequestParam String query)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		List<Coupon> listCoupon = null;
+		try
+		{
+			listCoupon = couponService.getCouponByName(query);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(listCoupon);
+		return new ResponseEntity<ResponseModel>(response, listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/getMostViewed", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> getCouponByClickcount(@RequestParam int number)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		List<Coupon> listCoupon = null;
+		try
+		{
+			listCoupon = couponService.getCouponByClickcount(number);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(listCoupon);
+		return new ResponseEntity<ResponseModel>(response, listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+}
