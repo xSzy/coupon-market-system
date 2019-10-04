@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login_register.LoginActivity"
+    android:padding="@dimen/distance_8">
+
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_username"
+        android:padding="@dimen/distance_8"
+        android:gravity="center_horizontal"
+        android:background="@drawable/edt_default"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_password"
+        android:padding="@dimen/distance_8"
+        android:inputType="textPassword"
+        android:layout_below="@id/username"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/distance_8"
+        android:background="@drawable/edt_default"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="login"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_below="@id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/distance_8"
+        android:background="@drawable/edt_default"
+        android:onClick="loginAccount"/>
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="register"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_below="@id/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/distance_8"
+        android:onClick="registerAccount"/>
+</RelativeLayout>
