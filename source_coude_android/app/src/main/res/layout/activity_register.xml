@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_register_user.LoginActivity"
-    android:theme="@style/LoginRegisterTheme"
+    tools:context=".RegisterActivity"
     android:padding="@dimen/distance_8">
 
-
     <EditText
-        android:id="@+id/usernameLog"
+        android:id="@+id/usernameReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_username"
@@ -19,46 +17,39 @@
         android:background="@drawable/edt_default"/>
 
     <EditText
-        android:id="@+id/passwordLog"
+        android:id="@+id/passwordReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_password"
         android:padding="@dimen/distance_8"
         android:inputType="textPassword"
-        android:layout_below="@id/usernameLog"
+        android:layout_below="@id/usernameReg"
         android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/distance_8"
         android:background="@drawable/edt_default"/>
 
     <Button
-        android:id="@+id/loginLog"
+        android:id="@+id/registerReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="đăng nhập"
+        android:text="đăng ký"
         android:textColor="@android:color/holo_blue_bright"
-        android:layout_below="@id/passwordLog"
+        android:layout_below="@id/passwordReg"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/distance_8"
         android:background="@drawable/edt_default"
-        android:onClick="loginAccount"/>
+        android:onClick="registerNewAccount"/>
 
-    <TextView
-        android:id="@+id/registerLog"
+    <Button
+        android:id="@+id/cancelReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="đăng ký ?"
-        android:textStyle="italic"
+        android:text="hủy"
         android:textColor="@android:color/holo_blue_bright"
-        android:layout_below="@id/loginLog"
+        android:layout_below="@id/registerReg"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/distance_8"
-        android:onClick="registerAccount"/>
+        android:background="@drawable/edt_default"
+        android:onClick="cancelRegister"/>
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/registerLog"
-        android:layout_marginTop="@dimen/distance_8"
-        android:layout_centerInParent="true" />
 </RelativeLayout>

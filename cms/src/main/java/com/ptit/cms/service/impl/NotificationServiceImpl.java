@@ -28,7 +28,10 @@ public class NotificationServiceImpl implements NotificationService
 		List<Notification> listNoti = notificationDao.getNotificationByUser(user);
 		try
 		{
+			
 			notificationDao.deleteAll(listNoti);
+			
+			
 		}
 		catch(Exception e)
 		{
