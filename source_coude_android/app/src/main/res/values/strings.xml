@@ -11,4 +11,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="hint_username">nhập tài khoản</string>
     <string name="hint_password">nhập mật khẩu</string>
+    <string name="facebook_app_id">2579909545564416</string>
+    <string name="fb_login_protocol_scheme">fb2579909545564416</string>
 </resources>
