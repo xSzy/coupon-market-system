@@ -13,7 +13,7 @@ public interface CouponService
 
 	boolean updateCouponClickcount(int couponId) throws Exception;
 
-	List<Coupon> getAllCoupon();
+	Iterable<Coupon> getAllCoupon(int pageNum, int pageSize);
 
 	List<Coupon> getCouponByCategory(int categoryId) throws Exception;
 

@@ -3,11 +3,7 @@ package com.tnq.ngocquang.datn.login_register_user;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -23,23 +19,21 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.tnq.ngocquang.datn.R;
-import com.tnq.ngocquang.datn.RegisterActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import constant.Constant;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -107,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginAccount(View view) {
-        String url = "http://192.168.1.20:8080/cms/user/login";
+        String url = Constant.hostname + Constant.loginAPI;
         String username = mUserName.getText().toString().trim();
         String password = mPassWord.getText().toString().trim();
         if(username.isEmpty() || password.isEmpty()){

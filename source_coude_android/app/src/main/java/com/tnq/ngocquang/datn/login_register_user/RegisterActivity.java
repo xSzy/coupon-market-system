@@ -1,4 +1,4 @@
-package com.tnq.ngocquang.datn;
+package com.tnq.ngocquang.datn.login_register_user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.tnq.ngocquang.datn.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import constant.Constant;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -32,13 +35,17 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mUsername = findViewById(R.id.usernameReg);
-        mPassword = findViewById(R.id.passwordReg);
+        anhxa();
 
     }
 
+    private void anhxa(){
+        mUsername = findViewById(R.id.usernameReg);
+        mPassword = findViewById(R.id.passwordReg);
+    }
+
     public void registerNewAccount(View view) {
-        String url = "http://192.168.1.20:8080/cms/user/register";
+        String url = Constant.hostname + Constant.registerAPI;
         String username = mUsername.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
         if(username.isEmpty() || password.isEmpty()){
