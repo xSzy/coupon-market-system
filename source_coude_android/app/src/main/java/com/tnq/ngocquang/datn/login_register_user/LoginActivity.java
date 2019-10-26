@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private EditText mUserName;
     private EditText mPassWord;
-    private LoginButton loginButton;
+    private LoginButton mLoginButton;
 
     @Override
     protected void onStart() {
@@ -55,23 +55,25 @@ public class LoginActivity extends AppCompatActivity {
         anhxa();
 
         callbackManager = CallbackManager.Factory.create();
-        loginButton.setReadPermissions(Arrays.asList("public_profile","email","user_gender","user_birthday"));
+        mLoginButton.setReadPermissions(Arrays.asList("public_profile","email","user_gender","user_birthday"));
         loginByFacebook();
     }
     private void anhxa(){
         mUserName = findViewById(R.id.usernameLog);
         mPassWord = findViewById(R.id.passwordLog);
-        loginButton = findViewById(R.id.login_button);
+        mLoginButton = findViewById(R.id.login_button);
     }
 
     private void loginByFacebook() {
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        mLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.d("AAA",response.getJSONObject().toString());
+                        mLoginButton.setVisibility(View.INVISIBLE);
+
                     }
                 });
                 Bundle parameters = new Bundle();
@@ -109,16 +111,18 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
 
-            loginHandle(url);
+            loginHandle(url,username, password, "");
         }
 
     }
 
-    private void loginHandle(String url){
+    private void loginHandle(String url,String userName, String passWord, String userId){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         Map<String,String> params = new HashMap<>();
-        params.put("username",mUserName.getText().toString().trim());
-        params.put("password",mPassWord.getText().toString().trim());
+        params.put("username",userName);
+        params.put("password",passWord);
+        params.put("userId",userId);
+
 
 
         JSONObject jsonObject = new JSONObject(params);

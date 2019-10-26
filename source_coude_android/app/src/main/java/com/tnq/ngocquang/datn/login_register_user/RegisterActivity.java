@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "mật khẩu bạn nhập chưa đúng định dạng", Toast.LENGTH_SHORT).show();
         }
         else{
-            registerHandle(url);
+            registerHandle(url,username,password,"");
         }
     }
 
@@ -67,12 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
-    private void registerHandle(String url) {
+    public  void registerHandle(String url,String userName, String passWord, String userId) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("username",mUsername.getText().toString().trim());
-            jsonObject.put("password",mPassword.getText().toString().trim());
+            jsonObject.put("username",userName);
+            jsonObject.put("password",passWord);
+            jsonObject.put("userId",userId);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -75,8 +75,8 @@ public class CouponController {
 
 	@RequestMapping(value = "/coupon/getAll", method = RequestMethod.GET)
 	public ResponseEntity<ResponseModel> getAllCoupon(
-			@RequestParam(value = "_page", defaultValue = "1") int _page,
-			@RequestParam(value = "_limit", defaultValue = "10") int _limit)
+			@RequestParam(value = "_page", required = true) int _page,
+			@RequestParam(value = "_limit", required = true) int _limit)
 
 	{
 		
@@ -87,7 +87,7 @@ public class CouponController {
 		try {
 			listCoupon = new ArrayList<Coupon>();
 			//listCoupon = Lists.newArrayList(couponService.getAllCoupon(1, 10));
-			couponService.getAllCoupon(_page, _limit).forEach(listCoupon::add);
+			couponService.getAllCoupon(_page,_limit).forEach(listCoupon::add);
 			response.setStatus(Constant.STATUS_SUCCESS);
 			response.setError(null);
 		} catch (Exception e) {

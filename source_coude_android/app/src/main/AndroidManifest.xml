@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".list_coupon.DetailCouponActivity"></activity>
+        <activity android:name=".AddCouponActivity"></activity>
+        <activity android:name=".list_coupon.DetailCouponActivity" />
         <activity android:name=".list_coupon.ListCoupon">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

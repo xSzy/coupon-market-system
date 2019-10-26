@@ -9,6 +9,14 @@
     android:padding="@dimen/distance_8">
 
 
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ĐĂNG NHẬP"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"/>
     <EditText
         android:id="@+id/usernameLog"
         android:layout_width="match_parent"
@@ -16,7 +24,8 @@
         android:hint="@string/hint_username"
         android:padding="@dimen/distance_8"
         android:gravity="center_horizontal"
-        android:background="@drawable/edt_default"/>
+        android:background="@drawable/edt_default"
+        android:layout_below="@id/login_title"/>
 
     <EditText
         android:id="@+id/passwordLog"
