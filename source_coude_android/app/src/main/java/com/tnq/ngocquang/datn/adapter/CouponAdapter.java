@@ -1,6 +1,11 @@
 package com.tnq.ngocquang.datn.adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tnq.ngocquang.datn.R;
+import com.tnq.ngocquang.datn.list_coupon.DetailCouponActivity;
+import com.tnq.ngocquang.datn.list_coupon.ListCoupon;
 import com.tnq.ngocquang.datn.model.Coupon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder> {
 
@@ -49,26 +57,36 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
         private TextView mTitle;
         private TextView mDescription;
         private CouponAdapter adapter;
+        private View view;
 
-        public ViewHolder(@NonNull View itemView, CouponAdapter adapter) {
+        public ViewHolder(@NonNull View itemView, final CouponAdapter adapter) {
             super(itemView);
+            this.view = itemView;
             mTitle = itemView.findViewById(R.id.couponTitle);
             mDescription = itemView.findViewById(R.id.couponDescription);
             this.adapter = adapter;
+            view.setOnClickListener(this);
         }
 
         void bindTo(Coupon coupon){
             mTitle.setText(coupon.getTitle().toString() + "");
             mDescription.setText(coupon.getDescription().toString() + "");
+
         }
 
 
         @Override
         public void onClick(View view) {
-            int position = this.getAdapterPosition();
+            int position = getAdapterPosition();
             Coupon coupon = mListCoupon.get(position);
-            Toast.makeText(mContext, "" + coupon.getTitle(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "" + coupon.getTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(mContext, DetailCouponActivity.class);
+            intent.putExtra("coupon",coupon);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, Pair.create((View)mTitle,"title_coupon"));
+                mContext.startActivity(intent,options.toBundle());
 
+            }
         }
     }
 }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-@SuppressLint("ParcelCreator")
 public class Coupon implements Parcelable {
     private String title;
     private String description;
@@ -20,6 +19,19 @@ public class Coupon implements Parcelable {
         title = in.readString();
         description = in.readString();
     }
+
+    public static final Creator<Coupon> CREATOR = new Creator<Coupon>() {
+        @Override
+        public Coupon createFromParcel(Parcel in) {
+            return new Coupon(in);
+        }
+
+        @Override
+        public Coupon[] newArray(int size) {
+            return new Coupon[size];
+        }
+    };
+
 
     public String getTitle() {
         return title;
