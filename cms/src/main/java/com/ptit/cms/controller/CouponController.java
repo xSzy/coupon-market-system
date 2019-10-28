@@ -168,6 +168,7 @@ public class CouponController {
 				listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
 	}
 
+	// trả về danh sách coupon xem nhiều nhất
 	@RequestMapping(value = "/coupon/getMostViewed", method = RequestMethod.GET)
 	public ResponseEntity<ResponseModel> getCouponByClickcount(@RequestParam int number) {
 		ResponseModel response = new ResponseModel();
