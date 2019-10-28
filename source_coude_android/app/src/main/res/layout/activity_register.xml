@@ -46,8 +46,7 @@
         android:layout_below="@id/passwordReg"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/distance_8"
-        android:background="@drawable/edt_default"
-        android:onClick="registerNewAccount"/>
+        android:background="@drawable/edt_default"/>
 
     <Button
         android:id="@+id/cancelReg"

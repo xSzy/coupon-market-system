@@ -14,15 +14,19 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.tnq.ngocquang.datn.AddCouponActivity;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.adapter.CouponAdapter;
+import com.tnq.ngocquang.datn.login_register_user.LoginActivity;
 import com.tnq.ngocquang.datn.model.Coupon;
 import com.tnq.ngocquang.datn.support.EndlessRecyclerViewScrollListener;
 
@@ -88,8 +92,9 @@ public class ListCoupon extends AppCompatActivity {
                 try {
                     JSONArray listCouponJSON = response.getJSONArray("data");
                     for (int i = 0; i < listCouponJSON.length(); i++) {
-                        JSONObject coupon = listCouponJSON.getJSONObject(i);
-                        Coupon coupon1 = new Coupon(coupon.getString("title"), coupon.getString("description"));
+                        JSONObject couponJSON = listCouponJSON.getJSONObject(i);
+                        Gson gson = new Gson();
+                        Coupon coupon1 = gson.fromJson(couponJSON.toString(),Coupon.class);
                         mListCoupon.add(coupon1);
 
                     }
@@ -102,7 +107,7 @@ public class ListCoupon extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("AAA", error.getMessage());
+                Log.d("AAA", error.toString());
             }
         }) {
             @Override
@@ -112,6 +117,8 @@ public class ListCoupon extends AppCompatActivity {
                 return headers;
             }
         };
+        request.setRetryPolicy( new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         requestQueue.add(request);
     }
 
@@ -128,7 +135,7 @@ public class ListCoupon extends AppCompatActivity {
         switch (id) {
             case R.id.add_coupon:
                 // add coupon
-                Intent intent = new Intent(ListCoupon.this, AddCouponActivity.class);
+                Intent intent = new Intent(ListCoupon.this, LoginActivity.class);
                 startActivity(intent);
                 return true;
             default:

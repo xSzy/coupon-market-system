@@ -3,11 +3,14 @@ package com.tnq.ngocquang.datn.login_register_user;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,32 +33,53 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText mUsername;
     EditText mPassword;
+    Button mRegister;
+    public static String url = Constant.hostname + Constant.registerAPI;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         anhxa();
+        userId = getIntent().getStringExtra("userId");
+        if(userId != null){
+            mUsername.setVisibility(View.INVISIBLE);
+            mPassword.setVisibility(View.INVISIBLE);
+        }
+        mRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerNewAccount(view);
+            }
+        });
+
 
     }
+
 
     private void anhxa(){
         mUsername = findViewById(R.id.usernameReg);
         mPassword = findViewById(R.id.passwordReg);
+        mRegister = findViewById(R.id.registerReg);
     }
 
     public void registerNewAccount(View view) {
-        String url = Constant.hostname + Constant.registerAPI;
-        String username = mUsername.getText().toString().trim();
-        String password = mPassword.getText().toString().trim();
-        if(username.isEmpty() || password.isEmpty()){
-            Toast.makeText(this, "bạn chưa nhập tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
-        }else if(!isPassValid(password)){
-            Toast.makeText(this, "mật khẩu bạn nhập chưa đúng định dạng", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            registerHandle(url,username,password,"");
-        }
+       if(userId != null){
+           registerHandle("","", userId.toString());
+           finish();
+       }else{
+           String username = mUsername.getText().toString().trim();
+           String password = mPassword.getText().toString().trim();
+           if(username.isEmpty() || password.isEmpty()){
+               Toast.makeText(this, "bạn chưa nhập tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+           }else if(!isPassValid(password)){
+               Toast.makeText(this, "mật khẩu bạn nhập chưa đúng định dạng", Toast.LENGTH_SHORT).show();
+           }
+           else{
+               registerHandle(username,password, "");
+           }
+       }
     }
 
     private boolean isPassValid(String password){
@@ -67,8 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
-    public  void registerHandle(String url,String userName, String passWord, String userId) {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+    public void registerHandle(String userName, String passWord, String userId) {
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username",userName);
@@ -81,11 +105,11 @@ public class RegisterActivity extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
+                setContentView(R.layout.activity_register);
                 try {
                     String status = response.getString("status");
                     if(status.equals("success")){
-                        Toast.makeText(RegisterActivity.this, "đăng ký thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "đăng ký thành công", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -94,7 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(RegisterActivity.this, "đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                Log.d("AAA","register : " + error.toString());
+                Toast.makeText(getApplicationContext(), "đăng ký thất bại", Toast.LENGTH_SHORT).show();
 
             }
         }){
@@ -105,6 +130,8 @@ public class RegisterActivity extends AppCompatActivity {
                 return headers;
             }
         };
+//        request.setRetryPolicy( new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         requestQueue.add(request);
     }
 
