@@ -1,4 +1,7 @@
 <resources>
+    <array name="demo_icon_category">
+        <item>@drawable/coupon</item>
+    </array>
     <string name="app_name">DATN</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -12,11 +15,8 @@
     <string name="hint_username">nhập tài khoản</string>
     <string name="hint_password">nhập mật khẩu</string>
     <string name="facebook_app_id">2579909545564416</string>
+
+
     <string name="fb_login_protocol_scheme">fb2579909545564416</string>
-
-
-    <array name="demo_icon_category">
-        <item>@drawable/coupon </item>
-    </array>
 
 </resources>

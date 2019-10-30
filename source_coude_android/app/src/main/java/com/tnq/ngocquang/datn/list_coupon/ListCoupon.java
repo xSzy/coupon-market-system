@@ -11,19 +11,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.tnq.ngocquang.datn.AddCouponActivity;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.adapter.CouponAdapter;
 import com.tnq.ngocquang.datn.login_register_user.LoginActivity;
@@ -35,11 +32,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import constant.Constant;
+import com.tnq.ngocquang.datn.constant.Constant;
 
 public class ListCoupon extends AppCompatActivity {
 
@@ -83,7 +79,6 @@ public class ListCoupon extends AppCompatActivity {
     private void fetchListCoupon(int page) {
         String url = Constant.hostname + Constant.listCouponAPI;
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JSONObject jsonObject = new JSONObject();
 
         url += "?_page=" + page + "&_limit=20";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

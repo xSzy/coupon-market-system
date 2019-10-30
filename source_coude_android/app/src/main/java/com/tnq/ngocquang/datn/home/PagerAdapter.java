@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.tnq.ngocquang.datn.home.tab_home.TabHome;
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private int mNumOfTabs;
     public PagerAdapter(@NonNull FragmentManager fm, int numberOfTabs) {

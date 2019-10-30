@@ -1,8 +1,11 @@
 package com.tnq.ngocquang.datn.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Category {
+public class Category implements Parcelable {
 
     private int id;
     private String name;
@@ -12,9 +15,33 @@ public class Category {
     private String descriptionEnglish;
     private boolean topCategory;
 
+    protected Category(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        icon = in.readString();
+        subCategory = in.createTypedArrayList(Category.CREATOR);
+        description = in.readString();
+        descriptionEnglish = in.readString();
+        topCategory = in.readByte() != 0;
+    }
+
+    public static final Creator<Category> CREATOR = new Creator<Category>() {
+        @Override
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
+
+        @Override
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
+
     public int getId() {
         return id;
     }
+
+
 
     public void setId(int id) {
         this.id = id;
@@ -66,5 +93,22 @@ public class Category {
 
     public void setTopCategory(boolean topCategory) {
         this.topCategory = topCategory;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(icon);
+        parcel.writeTypedList(subCategory);
+        parcel.writeString(description);
+        parcel.writeString(descriptionEnglish);
+        parcel.writeByte((byte) (topCategory ? 1 : 0));
     }
 }
