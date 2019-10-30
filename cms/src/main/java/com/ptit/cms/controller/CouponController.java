@@ -103,13 +103,16 @@ public class CouponController {
 	}
 
 	@RequestMapping(value = "/coupon/findByCategory", method = RequestMethod.GET)
-	public ResponseEntity<ResponseModel> getCouponByCategory(@RequestParam int categoryId) {
+	public ResponseEntity<ResponseModel> getCouponByCategory(@RequestParam int categoryId,
+			@RequestParam(value = "_page", required = true) int _page,
+			@RequestParam(value = "_limit", required = true) int _limit) {
 		ResponseModel response = new ResponseModel();
 		ErrorMessage errorMessage = new ErrorMessage();
 
 		List<Coupon> listCoupon = null;
 		try {
-			listCoupon = couponService.getCouponByCategory(categoryId);
+			listCoupon = new ArrayList<Coupon>();
+			couponService.getCouponByCategory(_page, _limit, categoryId).forEach(listCoupon::add);
 			response.setStatus(Constant.STATUS_SUCCESS);
 			response.setError(null);
 		} catch (Exception e) {

@@ -15,7 +15,7 @@ import com.ptit.cms.model.entity.Coupon;
 public interface CouponDao extends JpaRepository<Coupon, Integer>,PagingAndSortingRepository<Coupon, Integer>
 {
 	@Query("SELECT c FROM Coupon c WHERE c.category = ?1")
-	List<Coupon> getCouponByCategory(Category c);
+	List<Coupon> getCouponByCategory(Category c,Pageable pageable);
 	
 	@Query("SELECT c FROM Coupon c WHERE UPPER(c.title) LIKE ?1")
 	List<Coupon> getCouponByName(String query);

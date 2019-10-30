@@ -91,11 +91,12 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public Iterable<Coupon> getAllCoupon(int pageNum, int pageSize) {
 		Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+		
 		return couponDao.findAll(pageable);
 	}
 
 	@Override
-	public List<Coupon> getCouponByCategory(int categoryId) throws Exception {
+	public Iterable<Coupon> getCouponByCategory(int pageNum, int pageSize, int categoryId) throws Exception {
 		Category category = categoryDao.getOne(categoryId);
 		if (category == null)
 			throw new Exception("category not found");
@@ -103,7 +104,7 @@ public class CouponServiceImpl implements CouponService {
 		System.out.println(listCategory.size());
 		List<Coupon> listCoupon = new ArrayList<>();
 		for (Category c : listCategory) {
-			listCoupon.addAll(couponDao.getCouponByCategory(c));
+			listCoupon.addAll(couponDao.getCouponByCategory(c, new PageRequest(pageNum - 1, pageSize)));
 		}
 		return listCoupon;
 	}

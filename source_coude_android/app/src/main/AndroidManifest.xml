@@ -5,14 +5,15 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:label=""
         android:theme="@style/AppTheme">
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".home.tab_home.DetailCategory"></activity>
+        <activity android:name=".NotificationActivity" />
         <activity android:name=".home.TabInfo" />
         <activity android:name=".home.TabSearch" />
-        <activity android:name=".home.TabHome" />
+        <activity android:name=".home.tab_home.TabHome" />
         <activity android:name=".home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +25,7 @@
         <activity android:name=".list_coupon.DetailCouponActivity" />
         <activity android:name=".list_coupon.ListCoupon" />
         <activity android:name=".login_register_user.RegisterActivity" />
-        <activity android:name=".login_register_user.LoginActivity"></activity>
+        <activity android:name=".login_register_user.LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"

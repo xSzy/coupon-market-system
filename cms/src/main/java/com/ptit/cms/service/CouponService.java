@@ -15,7 +15,7 @@ public interface CouponService
 
 	Iterable<Coupon> getAllCoupon(int pageNum, int pageSize);
 
-	List<Coupon> getCouponByCategory(int categoryId) throws Exception;
+	Iterable<Coupon> getCouponByCategory(int pageNum, int pageSize, int categoryId) throws Exception;
 
 	Coupon getCouponById(int couponId) throws Exception;
 
