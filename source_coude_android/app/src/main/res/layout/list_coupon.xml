@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    android:layout_height="150dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/distance_8">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/couponTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:transitionName="title_coupon"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:text="title"/>
+        <TextView
+            android:id="@+id/couponDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:text="description"
+            android:layout_below="@id/couponTitle"/>
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

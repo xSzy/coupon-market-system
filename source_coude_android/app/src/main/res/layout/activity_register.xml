@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login_register_user.RegisterActivity"
+    android:padding="@dimen/distance_8">
+
+    <TextView
+        android:id="@+id/register_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ĐĂNG KÝ"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/usernameReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_username"
+        android:padding="@dimen/distance_8"
+        android:gravity="center_horizontal"
+        android:background="@drawable/edt_default"
+        android:layout_below="@id/register_title"/>
+
+    <EditText
+        android:id="@+id/passwordReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_password"
+        android:padding="@dimen/distance_8"
+        android:inputType="textPassword"
+        android:layout_below="@id/usernameReg"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/distance_8"
+        android:background="@drawable/edt_default"/>
+
+    <Button
+        android:id="@+id/registerReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="đăng ký"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_below="@id/passwordReg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/distance_8"
+        android:background="@drawable/edt_default"/>
+
+    <Button
+        android:id="@+id/cancelReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hủy"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_below="@id/registerReg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/distance_8"
+        android:background="@drawable/edt_default"
+        android:onClick="cancelRegister"/>
+
+</RelativeLayout>
