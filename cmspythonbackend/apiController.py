@@ -22,4 +22,13 @@ def visualSearch():
 
 @app.route('/updateData', methods=['POST'])
 def updateData():
-    return prepredict();
+    result = prepredict();
+    if result == 0:
+        return jsonify("generating");
+    elif result == 1:
+        return jsonify("started");
+
+@app.route('/trainData', methods=['POST'])
+def trainData():
+
+    return;
