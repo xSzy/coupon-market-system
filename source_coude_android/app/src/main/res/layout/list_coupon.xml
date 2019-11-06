@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/distance_8">
@@ -10,20 +10,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/couponTitle"
+        <ImageView
+            android:id="@+id/image_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:transitionName="image_coupon"
+            android:background="@drawable/img_default"
+            android:layout_marginBottom="@dimen/distance_8"/>
+        <ImageView
+            android:id="@+id/label_coupon"
+            android:src="@drawable/ic_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:transitionName="title_coupon"
-            style="@style/TextAppearance.AppCompat.Large"
-            android:text="title"/>
+            android:layout_below="@id/image_coupon"
+            android:layout_marginStart="@dimen/distance_8"/>
         <TextView
-            android:id="@+id/couponDescription"
-            android:layout_width="match_parent"
+            android:id="@+id/coupon_value"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:text="description"
-            android:layout_below="@id/couponTitle"/>
+            android:text="coupon value"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_toRightOf="@id/label_coupon"
+            android:layout_marginStart="@dimen/distance_8"
+            android:layout_below="@id/image_coupon"/>
+        <TextView
+            android:id="@+id/coupon_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:maxLines="1"
+            android:layout_marginStart="@dimen/distance_8"
+            android:layout_marginLeft="@dimen/distance_8"
+            android:layout_marginTop="@dimen/distance_8"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_below="@id/coupon_value"/>
+
 
 
 

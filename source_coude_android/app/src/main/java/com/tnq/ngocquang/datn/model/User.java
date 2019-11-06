@@ -1,8 +1,11 @@
 package com.tnq.ngocquang.datn.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class User {
+public class User implements Parcelable {
 
     private Account account;
     private String avatarUrl;
@@ -14,6 +17,45 @@ public class User {
     private String citizenId;
     private int gender; // 1 : male // 2 : female
     private int role;
+
+    public User() {
+    }
+
+    public User(Account account, String avatarUrl, String name, Date dob, String email, String address, String phoneNumber, String citizenId, int gender, int role) {
+        this.account = account;
+        this.avatarUrl = avatarUrl;
+        this.name = name;
+        this.dob = dob;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.citizenId = citizenId;
+        this.gender = gender;
+        this.role = role;
+    }
+
+    protected User(Parcel in) {
+        avatarUrl = in.readString();
+        name = in.readString();
+        email = in.readString();
+        address = in.readString();
+        phoneNumber = in.readString();
+        citizenId = in.readString();
+        gender = in.readInt();
+        role = in.readInt();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public Account getAccount() {
         return account;
@@ -93,5 +135,22 @@ public class User {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(avatarUrl);
+        parcel.writeString(name);
+        parcel.writeString(email);
+        parcel.writeString(address);
+        parcel.writeString(phoneNumber);
+        parcel.writeString(citizenId);
+        parcel.writeInt(gender);
+        parcel.writeInt(role);
     }
 }

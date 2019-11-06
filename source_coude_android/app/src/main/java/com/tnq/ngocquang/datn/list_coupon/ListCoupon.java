@@ -84,6 +84,8 @@ public class ListCoupon extends AppCompatActivity {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                Log.d("AAA",response.toString());
+
                 try {
                     JSONArray listCouponJSON = response.getJSONArray("data");
                     for (int i = 0; i < listCouponJSON.length(); i++) {
@@ -91,7 +93,6 @@ public class ListCoupon extends AppCompatActivity {
                         Gson gson = new Gson();
                         Coupon coupon1 = gson.fromJson(couponJSON.toString(),Coupon.class);
                         mListCoupon.add(coupon1);
-
                     }
                     // update listCoupon
                     adapter.notifyDataSetChanged();
