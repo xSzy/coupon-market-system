@@ -6,19 +6,118 @@
     android:layout_height="match_parent"
     tools:context=".list_coupon.DetailCouponActivity">
 
-    <TextView
-        android:id="@+id/title_detail_coupon"
+    <ImageView
+        android:id="@+id/image_detail_coupon"
+        android:background="@drawable/img_default"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:text="Title"
-        android:transitionName="title_coupon"/>
+        android:scaleType="fitCenter"
+        android:transitionName="image_coupon"
+        android:adjustViewBounds="true"
+        android:layout_height="200dp"
+        android:layout_marginBottom="@dimen/distance_8"/>
 
-    <TextView
-        android:id="@+id/description_detail_coupon"
+    <ImageView
+        android:id="@+id/share_detail_coupon"
+        android:src="@drawable/ic_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/distance_8"
+        android:onClick="shareCoupon"
+        android:layout_alignTop="@id/image_detail_coupon"
+        android:layout_alignRight="@id/image_detail_coupon"/>
+
+    <ScrollView
+        android:layout_below="@id/image_detail_coupon"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_below="@id/image_detail_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/label_coupon"
+                android:src="@drawable/ic_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/distance_8"/>
+            <TextView
+                android:id="@+id/coupon_detail_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="coupon value"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_light"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_toRightOf="@id/label_coupon"
+                android:layout_marginStart="@dimen/distance_8"/>
+            <TextView
+                android:id="@+id/coupon_detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="title"
+                android:maxLines="3"
+                android:layout_marginStart="@dimen/distance_8"
+                android:layout_marginLeft="@dimen/distance_8"
+                android:layout_marginTop="@dimen/distance_8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_below="@id/coupon_detail_value"/>
+            <TextView
+                android:id="@+id/count_click_detail_coupon"
+                android:text="count click"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/coupon_detail_title"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_marginLeft="@dimen/distance_8"
+                android:layout_marginStart="@dimen/distance_8"/>
+            <TextView
+                android:id="@+id/address_detail_coupon"
+                android:text="address"
+                android:maxLines="3"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/count_click_detail_coupon"
+                android:layout_marginTop="@dimen/distance_8"
+                android:textStyle="italic"
+                android:layout_marginLeft="@dimen/distance_8"
+                android:layout_marginStart="@dimen/distance_8"/>
+            <ImageView
+                android:id="@+id/map_detail_coupon"
+                android:src="@drawable/ic_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/address_detail_coupon"
+                android:layout_toRightOf="@id/address_detail_coupon"
+                android:onClick="mapOfCoupon"
+                android:layout_marginStart="@dimen/distance_8"/>
+
+            <TextView
+                android:id="@+id/description_detail_coupon"
+                android:text="description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:layout_below="@id/address_detail_coupon"
+                android:layout_margin="@dimen/distance_8" />
+        </RelativeLayout>
+    </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/call_detail_coupon"
+        android:src="@drawable/ic_call"
+        app:backgroundTint="#60C2D5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:text="description"
-        android:layout_below="@id/title_detail_coupon"/>
+        android:layout_margin="@dimen/distance_8"
+        android:onClick="callToAuthor"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
+
+
 </RelativeLayout>
