@@ -55,6 +55,7 @@ public class Coupon
 	@Column(name = "description")
 	private String description;
 	
+	@JsonIgnore
 	@Column(name = "clickCount")
 	private int clickCount;
 	
