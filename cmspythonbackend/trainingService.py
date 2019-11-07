@@ -1,22 +1,9 @@
-<<<<<<< HEAD
-import skimage.io;
-import numpy as np;
-import pandas as pd;
-import sklearn.metrics.pairwise;
-from scipy.sparse import coo_matrix;
-from IPython.display import Image, display
-from keras.applications import VGG16, ResNet50;
-from keras.applications.vgg16 import preprocess_input;
-from keras.preprocessing.image import ImageDataGenerator;
-from keras.preprocessing import image as kimage;
-=======
 import numpy as np;
 import keras;
 from keras.layers import Dense, Dropout, Flatten;
 from keras.optimizers import Nadam, SGD;
 from keras.models import Model;
 from keras.preprocessing.image import ImageDataGenerator;
->>>>>>> a75647489322773e18671b923adc952b0940e110
 from keras.models import load_model;
 import glob;
 import os;
@@ -28,10 +15,7 @@ graph = tf.get_default_graph();
 
 imagelist = [];
 is_generating = False;
-<<<<<<< HEAD
-=======
 is_training = False;
->>>>>>> a75647489322773e18671b923adc952b0940e110
 
 # read path from cfg
 file_object = open(r"pythonpaths.cfg","r");
@@ -46,11 +30,7 @@ for path in paths:
 def prepredict():
     global is_generating;
     if is_generating == True:
-<<<<<<< HEAD
-        return "generating";
-=======
         return 0;
->>>>>>> a75647489322773e18671b923adc952b0940e110
 
     # get the latest model file
     listFiles = glob.glob(vsmodelpath + '\\*.h5');
@@ -71,11 +51,7 @@ def prepredict():
     t1 = threading.Thread(target=predict_job, args=(latestModel, image_it));
     t1.start();
 
-<<<<<<< HEAD
-    return "starting";
-=======
     return 1;
->>>>>>> a75647489322773e18671b923adc952b0940e110
 
 def predict_job(modelpath, imageiterator):
     with graph.as_default():
@@ -87,9 +63,6 @@ def predict_job(modelpath, imageiterator):
     savefilename = datetime.now().strftime('%Y%m%d%H%M%S') + '_data.npy';
     np.save('D:\\cmsdata\\savedata\\' + savefilename, predicts);
     global is_generating;
-<<<<<<< HEAD
-    is_generating = False;
-=======
     is_generating = False;
 
 def trainData():
@@ -137,4 +110,3 @@ def train_job(finalmodel, train_it, val_it):
 
     global is_training;
     is_training = False;
->>>>>>> a75647489322773e18671b923adc952b0940e110

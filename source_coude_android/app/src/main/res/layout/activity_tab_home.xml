@@ -13,24 +13,35 @@
         android:orientation="vertical"
         android:padding="@dimen/distance_8">
 
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/trend_coupon_pager"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@color/colorPrimary"
-                android:layout_height="180dp"/>
-            <me.relex.circleindicator.CircleIndicator
-                android:id="@+id/indicatior"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignTop="@id/trend_coupon_pager"
-                android:layout_alignRight="@id/trend_coupon_pager"
-                android:layout_alignEnd="@id/trend_coupon_pager"/>
-        </RelativeLayout>
-        
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:text="Xu hướng" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="xem thêm >" />
+            </RelativeLayout>
+            <!--           something-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/colorPrimary" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,11 +56,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
                     android:text="Thể loại" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="xem thêm >" />
             </RelativeLayout>
 
             <!--           something-->

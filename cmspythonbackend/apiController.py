@@ -22,9 +22,6 @@ def visualSearch():
 
 @app.route('/updateData', methods=['POST'])
 def updateData():
-<<<<<<< HEAD
-    return prepredict();
-=======
     result = prepredict();
     if result == 0:
         return jsonify("generating");
@@ -35,4 +32,3 @@ def updateData():
 def trainData():
 
     return;
->>>>>>> a75647489322773e18671b923adc952b0940e110
