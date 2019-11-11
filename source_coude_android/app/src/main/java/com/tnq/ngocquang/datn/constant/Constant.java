@@ -8,4 +8,5 @@ public class Constant {
     public static final String updateUserAPI = "/user/update";
     public static final String categoryGetAllAPI = "/category/getAll";
     public static final String findCouponByCateAPI = "/coupon/findByCategory";
+    public static final String trendCouponAPI = "/coupon/getMostViewed";
 }

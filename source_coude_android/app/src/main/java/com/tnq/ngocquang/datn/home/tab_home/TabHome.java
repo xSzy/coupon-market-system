@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +20,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.adapter.CategoryAdapter;
@@ -34,6 +34,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tnq.ngocquang.datn.constant.Constant;
+<<<<<<< HEAD
+import com.tnq.ngocquang.datn.model.Coupon;
+import com.tnq.ngocquang.datn.support.MyVolley;
+
+import me.relex.circleindicator.CircleIndicator;
+=======
+>>>>>>> master
 
 public class TabHome extends Fragment {
 
@@ -43,7 +50,17 @@ public class TabHome extends Fragment {
     private static RecyclerView mRecyclerView;
     public static View mView;
     private static ArrayList<Category> mCategoryData;
+<<<<<<< HEAD
+    private static ArrayList<Coupon> mCouponTrendData;
+    private static int currentItem;
+    private static Handler handler;
+    private static Runnable runnable;
+    private static RequestQueue requestQueue;
+    private static final String URL_CATEGORY_DETALL = Constant.hostname + Constant.categoryGetAllAPI;
+    private static final String URL_TREND_COUPON = Constant.hostname + Constant.trendCouponAPI;
+=======
     private static final String URL_CATEGORY_GETALL = Constant.hostname + Constant.categoryGetAllAPI;
+>>>>>>> master
 
     private void anhxa() {
         mRecyclerView = mView.findViewById(R.id.recyclerViewListCategory);
@@ -53,13 +70,79 @@ public class TabHome extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.activity_tab_home, container, false);
+        mView = inflater.inflate(R.layout.fragment_tab_home, container, false);
         anhxa();
+<<<<<<< HEAD
+        requestQueue = MyVolley.getInstance(mView.getContext()).getRequestQueue();
+        initTrendCoupon();
+=======
+>>>>>>> master
         initCategory();
         return mView;
     }
 
+<<<<<<< HEAD
+    private static void initTrendCoupon() {
+        mCouponTrendData = new ArrayList<>();
+        final TrendCouponAdapter adapter = new TrendCouponAdapter(mView.getContext(), mCouponTrendData);
+        mCouponTrendPager.setAdapter(adapter);
+        // fetch data trend coupon from server
+        String url = URL_TREND_COUPON + "?pageSize=8";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+//                Log.d("AAA", response.toString());
+                try {
+                    JSONArray listResponse = response.getJSONArray("data");
+                    for (int i = 0 ; i < listResponse.length() ;i ++){
+                        JSONObject object = listResponse.getJSONObject(i);
+                        Coupon coupon = new Gson().fromJson(object.toString(),Coupon.class);
+                        mCouponTrendData.add(coupon);
+                    }
+                    adapter.notifyDataSetChanged();
+                    indicator.setViewPager(mCouponTrendPager);
+                    adapter.registerDataSetObserver(indicator.getDataSetObserver());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("AAA", "error_trend_coupon : " + error.toString());
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<>();
+                headers.put("Content-Type","application/json");
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                currentItem = mCouponTrendPager.getCurrentItem();
+                currentItem++;
+                if (currentItem >= mCouponTrendPager.getAdapter().getCount()) {
+                    currentItem = 0;
+                }
+                mCouponTrendPager.setCurrentItem(currentItem, true);
+                handler.postDelayed(runnable, 5000);
+            }
+        };
+        handler.postDelayed(runnable, 5000);
+    }
+
+
+    private static void initCategory() {
+=======
     private static void initCategory(){
+>>>>>>> master
         LinearLayoutManager layoutManager = new LinearLayoutManager(mView.getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -68,8 +151,7 @@ public class TabHome extends Fragment {
         mRecyclerView.setAdapter(adapter);
 
         // retrieve category data from server
-        RequestQueue requestQueue = Volley.newRequestQueue(mView.getContext());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL_CATEGORY_GETALL, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL_CATEGORY_DETALL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -92,7 +174,11 @@ public class TabHome extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+<<<<<<< HEAD
+                Log.d("AAA", "error_init_category : " + error.toString());
+=======
                 Log.d("AAA","error : " + error.toString());
+>>>>>>> master
 
             }
         }){
