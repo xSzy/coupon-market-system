@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="150c5dc4-cc67-403e-a785-1e6719e6a4bb" name="Default Changelist" comment="" />
+=======
     <list default="true" id="150c5dc4-cc67-403e-a785-1e6719e6a4bb" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apiController.py" beforeDir="false" afterPath="$PROJECT_DIR$/apiController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trainingService.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainingService.py" afterDir="false" />
     </list>
+>>>>>>> a75647489322773e18671b923adc952b0940e110
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +38,10 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
+  <component name="ProjectId" id="1SUxehBSm47rRLD2jgad7P2JTb9" />
+  <component name="PropertiesComponent">
+=======
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -41,6 +49,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+>>>>>>> a75647489322773e18671b923adc952b0940e110
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -98,13 +107,18 @@
       <workItem from="1571632073314" duration="18470000" />
       <workItem from="1572062128505" duration="2041000" />
       <workItem from="1572420874651" duration="3873000" />
+<<<<<<< HEAD
+=======
       <workItem from="1572494947508" duration="9452000" />
+>>>>>>> a75647489322773e18671b923adc952b0940e110
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+<<<<<<< HEAD
+=======
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -116,6 +130,7 @@
       </map>
     </option>
   </component>
+>>>>>>> a75647489322773e18671b923adc952b0940e110
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/cmspythonbackend$trainingService.coverage" NAME="trainingService Coverage Results" MODIFIED="1571730942315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

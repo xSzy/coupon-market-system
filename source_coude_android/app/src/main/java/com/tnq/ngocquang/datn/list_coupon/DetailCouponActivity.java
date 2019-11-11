@@ -4,14 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 
 import android.content.Intent;
-<<<<<<< HEAD
 import android.content.res.TypedArray;
 import android.net.Uri;
-=======
->>>>>>> master
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.model.Coupon;
 import com.tnq.ngocquang.datn.support.ConvertCouponValue;
@@ -20,7 +22,6 @@ public class DetailCouponActivity extends AppCompatActivity {
 
     private TextView mTitle;
     private TextView mDescription;
-<<<<<<< HEAD
     private ImageView mImage;
     private ImageView mShare;
     private TextView mCouponValue;
@@ -30,15 +31,12 @@ public class DetailCouponActivity extends AppCompatActivity {
     private ImageView mMap;
     private Coupon coupon;
 
-=======
->>>>>>> master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_coupon);
         anhxa();
         Intent intent = getIntent();
-<<<<<<< HEAD
          coupon = intent.getParcelableExtra("coupon");
         Log.d("AAA",coupon.getProduct().getContact());
         if (coupon != null) {
@@ -66,17 +64,11 @@ public class DetailCouponActivity extends AppCompatActivity {
             mMap.setVisibility(View.INVISIBLE);
         }
 
-=======
-        Coupon coupon = intent.getParcelableExtra("coupon");
-        mTitle.setText(coupon.getTitle());
-        mDescription.setText(coupon.getDescription());
->>>>>>> master
     }
 
-    private void anhxa(){
-        mTitle = findViewById(R.id.title_detail_coupon);
+    private void anhxa() {
+        mTitle = findViewById(R.id.coupon_detail_title);
         mDescription = findViewById(R.id.description_detail_coupon);
-<<<<<<< HEAD
         mImage = findViewById(R.id.image_detail_coupon);
         mShare = findViewById(R.id.share_detail_coupon);
         mCouponValue = findViewById(R.id.coupon_detail_value);
@@ -156,7 +148,5 @@ public class DetailCouponActivity extends AppCompatActivity {
                 Toast.makeText(this, "không thực hiện được hành động", Toast.LENGTH_SHORT).show();
             }
         }
-=======
->>>>>>> master
     }
 }

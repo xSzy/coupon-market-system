@@ -15,6 +15,9 @@ public class Category implements Parcelable {
     private String descriptionEnglish;
     private boolean topCategory;
 
+    public Category() {
+    }
+
     protected Category(Parcel in) {
         id = in.readInt();
         name = in.readString();
