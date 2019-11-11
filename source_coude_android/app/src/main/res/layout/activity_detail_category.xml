@@ -8,8 +8,6 @@
     tools:context=".home.tab_home.DetailCategory"
     android:padding="@dimen/distance_8">
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategoryDetail"
         android:layout_width="match_parent"
@@ -22,20 +20,5 @@
         android:layout_below="@id/recyclerViewCategoryDetail"
         android:layout_marginTop="@dimen/distance_8"/>
 
-    <RelativeLayout
-        android:id="@+id/linlaheaderProgress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
 
-        <ProgressBar
-            android:id="@+id/pbHeaderProgress"
-            style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
 </RelativeLayout>
