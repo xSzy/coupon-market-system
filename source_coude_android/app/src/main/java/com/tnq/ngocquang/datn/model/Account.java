@@ -1,9 +1,39 @@
 package com.tnq.ngocquang.datn.model;
 
-public class Account {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Account implements Parcelable {
     private String username;
     private String password;
     private String userId;
+
+    public Account() {
+    }
+
+    public Account(String username, String password, String userId) {
+        this.username = username;
+        this.password = password;
+        this.userId = userId;
+    }
+
+    protected Account(Parcel in) {
+        username = in.readString();
+        password = in.readString();
+        userId = in.readString();
+    }
+
+    public static final Creator<Account> CREATOR = new Creator<Account>() {
+        @Override
+        public Account createFromParcel(Parcel in) {
+            return new Account(in);
+        }
+
+        @Override
+        public Account[] newArray(int size) {
+            return new Account[size];
+        }
+    };
 
     public String getUsername() {
         return username;
@@ -27,5 +57,17 @@ public class Account {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(username);
+        parcel.writeString(password);
+        parcel.writeString(userId);
     }
 }
