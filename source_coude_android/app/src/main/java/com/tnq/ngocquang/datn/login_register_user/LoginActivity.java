@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,6 +26,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.model.Account;
+import com.tnq.ngocquang.datn.model.Coupon;
 import com.tnq.ngocquang.datn.model.User;
 
 import org.json.JSONException;
@@ -36,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tnq.ngocquang.datn.constant.Constant;
+import com.tnq.ngocquang.datn.support.MyVolley;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -43,8 +46,10 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUserName;
     private EditText mPassWord;
     private LoginButton mLoginButton;
+    private RequestQueue requestQueue;
     private String url = Constant.hostname + Constant.loginAPI;
     private String urlUpdateUser = Constant.hostname + Constant.updateUserAPI;
+    private LoginFBCallBack mLoginFB;
     private boolean isOK;
     @Override
     protected void onStart() {
@@ -57,10 +62,24 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         anhxa();
-
+        requestQueue = MyVolley.getInstance(getApplicationContext()).getRequestQueue();
         callbackManager = CallbackManager.Factory.create();
         mLoginButton.setReadPermissions(Arrays.asList("public_profile","email","user_gender","user_birthday"));
-        loginByFacebook();
+        mLoginFB = new LoginFBCallBack(){
+            @Override
+            public void onSuccess(User user) {
+                Log.d("AAA", user.getAccount().getUserId() );
+
+                loginHandle(url,"","",user.getAccount().getUserId(),mLoginFB);
+            }
+
+            @Override
+            public void registerNewAccount(String userId) {
+
+            }
+        };
+
+        loginByFacebook(mLoginFB);
     }
     private void anhxa(){
         mUserName = findViewById(R.id.usernameLog);
@@ -68,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login_button);
     }
 
-    private void loginByFacebook() {
+    private void loginByFacebook(final LoginFBCallBack mLoginFB) {
         final User user = new User();
         final Account account = new Account();
         mLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -80,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                         mLoginButton.setVisibility(View.INVISIBLE);
 
                         try {
-
                             account.setUserId(object.getString("id"));
                             user.setAccount(account);
                             user.setName(object.getString("name"));
@@ -88,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                             String[] dob = object.getString("birthday").split("/");
                             Date date = new Date(Integer.parseInt(dob[2]), Integer.parseInt(dob[0]), Integer.parseInt(dob[1]) );
                             user.setDob(date);
+                            mLoginFB.onSuccess(user);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -125,12 +144,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "bạn chưa nhập tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
         }
         else{
-            loginHandle(url,username, password, "");
+            loginHandle(url,username, password, "1201897076688077",null);
         }
     }
 
-    private void loginHandle(final String url, final String userName, final String passWord, final String userId){
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack){
         Map<String,String> params = new HashMap<>();
         params.put("username",userName);
         params.put("password",passWord);
@@ -143,8 +161,8 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     String status = response.getString("status");
                     if(status.equals("success")){
-                        isOK = true;
                         Toast.makeText(LoginActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -153,9 +171,13 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("AAA", "login : "+ error.toString());
-                isOK = false;
-                Toast.makeText(LoginActivity.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                if(userId.isEmpty() && loginFBCallBack == null){
+                    Log.d("AAA", "login : "+ error.toString());
+                    Toast.makeText(LoginActivity.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    loginFBCallBack.registerNewAccount(userId);
+                }
             }
         }){
             @Override
@@ -165,7 +187,7 @@ public class LoginActivity extends AppCompatActivity {
                 return headers;
             }
         };
-//        request.setRetryPolicy( new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy( new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue.add(request);
     }

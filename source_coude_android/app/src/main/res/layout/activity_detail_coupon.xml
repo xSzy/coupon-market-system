@@ -74,6 +74,18 @@
                 android:layout_marginLeft="@dimen/distance_8"
                 android:layout_marginStart="@dimen/distance_8"/>
             <TextView
+                android:id="@+id/contact_detail_coupon"
+                android:layout_width="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/holo_red_light"
+                android:layout_height="wrap_content"
+                android:text="Xem chi tiết về sản phẩm"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_marginStart="@dimen/distance_8"
+                android:layout_marginLeft="@dimen/distance_8"
+                android:onClick="openWebsite"
+                android:layout_below="@id/count_click_detail_coupon"/>
+            <TextView
                 android:id="@+id/address_detail_coupon"
                 android:text="address"
                 android:maxLines="3"
@@ -81,7 +93,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/count_click_detail_coupon"
+                android:layout_below="@id/contact_detail_coupon"
                 android:layout_marginTop="@dimen/distance_8"
                 android:textStyle="italic"
                 android:layout_marginLeft="@dimen/distance_8"
@@ -111,7 +123,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/call_detail_coupon"
         android:src="@drawable/ic_call"
-        app:backgroundTint="#60C2D5"
+        app:backgroundTint="#71F0F0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/distance_8"

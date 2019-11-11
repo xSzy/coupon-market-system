@@ -14,6 +14,38 @@ public class Product implements Parcelable {
     public Product() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public ArrayList<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(ArrayList<ProductImage> productImages) {
+        this.productImages = productImages;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public Product(String name, String manufacturer, ArrayList<ProductImage> productImages, String contact) {
         this.name = name;
         this.manufacturer = manufacturer;
