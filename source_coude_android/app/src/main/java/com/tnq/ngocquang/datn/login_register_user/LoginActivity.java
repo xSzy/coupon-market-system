@@ -24,6 +24,8 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.gson.Gson;
+import com.tnq.ngocquang.datn.InfoActivity;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.model.Account;
 import com.tnq.ngocquang.datn.model.Coupon;
@@ -161,8 +163,11 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     String status = response.getString("status");
                     if(status.equals("success")){
-                        Toast.makeText(LoginActivity.this, "đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
+                        User user = new Gson().fromJson(response.toString(),User.class);
+                        Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
+                        intent.putExtra("user",user);
+                        startActivity(intent);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
