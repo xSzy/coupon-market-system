@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="130dp"
-    android:layout_height="match_parent" android:layout_margin="@dimen/distance_8">
+    android:layout_height="match_parent" android:layout_margin="@dimen/distance_8"
+    android:background="@android:color/white">
 
     <ImageView
         android:id="@+id/iconCategory"
@@ -17,6 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="title"
+        android:textColor="@android:color/black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_below="@id/iconCategory"
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/distance_8"/>

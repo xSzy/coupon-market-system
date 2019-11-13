@@ -130,9 +130,9 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public List<Coupon> getCouponByClickcount(int number) throws Exception {
+	public List<Coupon> getCouponByClickcount(int pageSize) throws Exception {
 		try {
-			return couponDao.getCouponByClickcount(new PageRequest(0, number));
+			return couponDao.getCouponByClickcount(new PageRequest(0, pageSize));
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

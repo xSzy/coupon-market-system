@@ -173,13 +173,13 @@ public class CouponController {
 
 	// trả về danh sách coupon xem nhiều nhất
 	@RequestMapping(value = "/coupon/getMostViewed", method = RequestMethod.GET)
-	public ResponseEntity<ResponseModel> getCouponByClickcount(@RequestParam int number) {
+	public ResponseEntity<ResponseModel> getCouponByClickcount(@RequestParam int pageSize) {
 		ResponseModel response = new ResponseModel();
 		ErrorMessage errorMessage = new ErrorMessage();
 
 		List<Coupon> listCoupon = null;
 		try {
-			listCoupon = couponService.getCouponByClickcount(number);
+			listCoupon = couponService.getCouponByClickcount(pageSize);
 			response.setStatus(Constant.STATUS_SUCCESS);
 			response.setError(null);
 		} catch (Exception e) {
