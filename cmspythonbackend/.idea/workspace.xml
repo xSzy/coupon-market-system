@@ -1,55 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="150c5dc4-cc67-403e-a785-1e6719e6a4bb" name="Default Changelist" comment="" />
-=======
-    <list default="true" id="150c5dc4-cc67-403e-a785-1e6719e6a4bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="ca297a20-7755-4aa4-ba79-a038976baa35" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cmspythonbackend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cmspythonbackend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apiController.py" beforeDir="false" afterPath="$PROJECT_DIR$/apiController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainingService.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainingService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pythonpaths.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/pythonpaths.cfg" afterDir="false" />
     </list>
->>>>>>> a75647489322773e18671b923adc952b0940e110
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-<<<<<<< HEAD
-  <component name="ProjectId" id="1SUxehBSm47rRLD2jgad7P2JTb9" />
-  <component name="PropertiesComponent">
-=======
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1SUxehBSm47rRLD2jgad7P2JTb9" />
+  <component name="ProjectId" id="1TdbY7Tjun5lMZmqsCDKaXRLCTN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
->>>>>>> a75647489322773e18671b923adc952b0940e110
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -66,59 +37,39 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="trainingService" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="cmspythonbackend" type="Python.FlaskServer">
       <module name="cmspythonbackend" />
+      <option name="target" value="$PROJECT_DIR$/apiController.py" />
+      <option name="targetType" value="PATH" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/trainingService.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.trainingService" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="150c5dc4-cc67-403e-a785-1e6719e6a4bb" name="Default Changelist" comment="" />
-      <created>1571632072155</created>
+      <changelist id="ca297a20-7755-4aa4-ba79-a038976baa35" name="Default Changelist" comment="" />
+      <created>1573792963491</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1571632072155</updated>
-      <workItem from="1571632073314" duration="18470000" />
-      <workItem from="1572062128505" duration="2041000" />
-      <workItem from="1572420874651" duration="3873000" />
-<<<<<<< HEAD
-=======
-      <workItem from="1572494947508" duration="9452000" />
->>>>>>> a75647489322773e18671b923adc952b0940e110
+      <updated>1573792963491</updated>
+      <workItem from="1573792970230" duration="773000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-<<<<<<< HEAD
-=======
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -129,9 +80,5 @@
         </entry>
       </map>
     </option>
-  </component>
->>>>>>> a75647489322773e18671b923adc952b0940e110
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/cmspythonbackend$trainingService.coverage" NAME="trainingService Coverage Results" MODIFIED="1571730942315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
