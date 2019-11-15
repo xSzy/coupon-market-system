@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
 import com.ptit.cms.model.entity.Category;
@@ -236,5 +238,29 @@ public class CouponController {
 		response.setData(result);
 		return new ResponseEntity<ResponseModel>(response,
 				result == false ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/coupon/findByImage", method = RequestMethod.POST)
+	public ResponseEntity<ResponseModel> findCouponByImage(@RequestPart MultipartFile file)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+		
+		Object data = null;
+		try
+		{
+			data = couponService.findByImage(file);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(data);
+		return new ResponseEntity<ResponseModel>(response, data == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
 	}
 }

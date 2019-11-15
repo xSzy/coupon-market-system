@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +19,8 @@ public class MiscServiceImpl implements MiscService
 	@Override
 	public String saveFile(MultipartFile file, String description) throws Exception
 	{
-		String path = Constant.IMAGE_UPLOAD_PATH + description + "\\";
+		Resource resource = new ClassPathResource("\\public\\static\\cmsdata");
+		String path = resource.getFile().getAbsolutePath() + File.separator + description + File.separator;
 		String name = file.getOriginalFilename();
 		if(name == null || name.length() <= 0)
 			throw new Exception(Constant.EXCEPTION_FILE_CORRUPT);
@@ -27,6 +30,7 @@ public class MiscServiceImpl implements MiscService
 		try
 		{
 			File serverFile = File.createTempFile(description, file.getOriginalFilename(), folder);
+			name = serverFile.getName();
 			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(serverFile));
 			bos.write(file.getBytes());
 			bos.close();
@@ -36,7 +40,7 @@ public class MiscServiceImpl implements MiscService
 		{
 			throw new Exception(e.getMessage());
 		}
-		return path;
+		return description + "/" + name;
 	}
 	
 }
