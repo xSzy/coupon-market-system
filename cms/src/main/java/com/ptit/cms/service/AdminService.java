@@ -1,6 +1,8 @@
 package com.ptit.cms.service;
 
+import java.util.Map;
+
 public interface AdminService
 {
-	String updateData() throws Exception;
+	Map updateData() throws Exception;
 }

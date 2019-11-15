@@ -1,5 +1,7 @@
 package com.ptit.cms.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class AdminController
 		ResponseModel response = new ResponseModel();
 		ErrorMessage errorMessage = new ErrorMessage();
 		
-		String result = null;
+		Map result = null;
 		try 
 		{
 			result = adminService.updateData();

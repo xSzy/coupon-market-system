@@ -1,38 +1,38 @@
-from flask import Flask, request;
-from flask_restful import Resource, Api;
-from json import dump;
-from flask import jsonify;
-from predictService import predict;
-from trainingService import prepredict;
+from flask import Flask, request
+from flask_restful import Resource, Api
+from json import dump
+from flask import jsonify
+from flask.json import JSONEncoder
 
-app = Flask(__name__);
+from predictService import predict, ImageSearchResult
+from trainingService import prepredict
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    return 'Server works!';
+class MyJSONEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, ImageSearchResult):
+            return {
+                'image': obj.image,
+                'similarity': obj.similarity
+            }
+        return super(MyJSONEncoder, self).default(obj)
 
-@app.route('/greet', methods=['GET', 'POST'])
-def greet():
-    response = jsonify(result = predict('C:\\testimg\\monitor1.jpg'));
-    return response;
+app = Flask(__name__)
+app.json_encoder = MyJSONEncoder
 
 @app.route('/visualSearch', methods=['POST'])
 def visualSearch():
-    return;
+    file = request.files['file']
+    return jsonify(result=predict(file))
 
 @app.route('/updateData', methods=['POST'])
 def updateData():
-<<<<<<< HEAD
-    return prepredict();
-=======
-    result = prepredict();
+    result = prepredict()
     if result == 0:
-        return jsonify("generating");
+        return jsonify("generating")
     elif result == 1:
-        return jsonify("started");
+        return jsonify("started")
+
 
 @app.route('/trainData', methods=['POST'])
 def trainData():
-
-    return;
->>>>>>> a75647489322773e18671b923adc952b0940e110
+    return

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../cmspythonbackend/.idea/cmspythonbackend.iml" filepath="$PROJECT_DIR$/../cmspythonbackend/.idea/cmspythonbackend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cmspythonbackend.iml" filepath="$PROJECT_DIR$/.idea/cmspythonbackend.iml" />
     </modules>
   </component>
 </project>

@@ -1,16 +1,23 @@
 package com.ptit.cms.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ptit.cms.dao.CategoryDao;
 import com.ptit.cms.dao.CouponDao;
@@ -21,6 +28,8 @@ import com.ptit.cms.model.entity.Coupon;
 import com.ptit.cms.model.entity.Notification;
 import com.ptit.cms.model.entity.User;
 import com.ptit.cms.service.CouponService;
+import com.ptit.cms.util.Constant;
+import com.ptit.cms.util.RestfulClientHandler;
 
 @Service
 public class CouponServiceImpl implements CouponService {
@@ -155,6 +164,24 @@ public class CouponServiceImpl implements CouponService {
 	public boolean deleteCoupon(Coupon coupon) {
 		couponDao.delete(coupon);
 		return true;
+	}
+	
+	@Override
+	public Object findByImage(MultipartFile file) throws Exception
+	{
+		MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+		ByteArrayResource fileAsResources = null;
+		try
+		{
+			fileAsResources = new ByteArrayResource(file.getBytes());
+		} catch (IOException e)
+		{
+			throw new Exception(Constant.EXCEPTION_FILE_CORRUPT);
+		}
+		body.add("file", fileAsResources);
+//		Map response = RestfulClientHandler.postForObject("http://localhost:5000/visualSearch", body, MediaType.MULTIPART_FORM_DATA);
+		Map response = RestfulClientHandler.test();
+		return response;
 	}
 
 	private List<Category> getAllSubCategory(Category category) {
