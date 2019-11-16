@@ -16,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -25,15 +24,18 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
-import com.tnq.ngocquang.datn.InfoActivity;
+import com.tnq.ngocquang.datn.home.tab_info.InfoActivity;
 import com.tnq.ngocquang.datn.R;
+import com.tnq.ngocquang.datn.home.tab_info.SendIntent;
+import com.tnq.ngocquang.datn.interface_.ISendIntent;
 import com.tnq.ngocquang.datn.model.Account;
-import com.tnq.ngocquang.datn.model.Coupon;
 import com.tnq.ngocquang.datn.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     private String url = Constant.hostname + Constant.loginAPI;
     private String urlUpdateUser = Constant.hostname + Constant.updateUserAPI;
     private LoginFBCallBack mLoginFB;
+    private ISendIntent mSendIntent;
     private boolean isOK;
     @Override
     protected void onStart() {
@@ -67,17 +70,37 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue = MyVolley.getInstance(getApplicationContext()).getRequestQueue();
         callbackManager = CallbackManager.Factory.create();
         mLoginButton.setReadPermissions(Arrays.asList("public_profile","email","user_gender","user_birthday"));
-        mLoginFB = new LoginFBCallBack(){
+//        mLoginFB = new LoginFBCallBack(){
+//            @Override
+//            public void onSuccess(User user) {
+//                Log.d("AAA", user.getAccount().getUserId() );
+//
+//                loginHandle(url,"","",user.getAccount().getUserId(),mLoginFB);
+//            }
+//
+//            @Override
+//            public void registerNewAccount(String userId) {
+//
+//            }
+//        };
+
+        mSendIntent = new SendIntent(){
             @Override
-            public void onSuccess(User user) {
-                Log.d("AAA", user.getAccount().getUserId() );
-
-                loginHandle(url,"","",user.getAccount().getUserId(),mLoginFB);
-            }
-
-            @Override
-            public void registerNewAccount(String userId) {
-
+            public void send(User user) {
+//                Log.d("AAA",user.getAccount().getUsername());
+                Log.d("AAA",user.getGender() + "");
+                Log.d("AAA",user.getAccount().getUsername() + "");
+                Log.d("AAA",user.getDob()+ "");
+                Intent intent = new Intent(LoginActivity.this,InfoActivity.class);
+                intent.putExtra("user",user);
+                Account account = user.getAccount();
+                Date dob = user.getDob();
+                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                String dobStr = dateFormat.format(dob);
+                intent.putExtra("dob",dobStr);
+                intent.putExtra("account",account);
+//                intent.putExtra("dob",dob);
+                startActivity(intent);
             }
         };
 
@@ -146,11 +169,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "bạn chưa nhập tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
         }
         else{
-            loginHandle(url,username, password, "1201897076688077",null);
+            loginHandle(url,username, password,"" ,null,mSendIntent);
         }
     }
 
-    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack){
+    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack, ISendIntent sendIntent){
         Map<String,String> params = new HashMap<>();
         params.put("username",userName);
         params.put("password",passWord);
@@ -163,11 +186,10 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     String status = response.getString("status");
                     if(status.equals("success")){
-
-                        User user = new Gson().fromJson(response.toString(),User.class);
-                        Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
-                        intent.putExtra("user",user);
-                        startActivity(intent);
+                        String data = response.getString("data");
+                        Log.d("AAA",data);
+                        User user = new Gson().fromJson(data,User.class);
+                        mSendIntent.send(user);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

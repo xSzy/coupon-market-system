@@ -1,4 +1,4 @@
-package com.tnq.ngocquang.datn.home;
+package com.tnq.ngocquang.datn.home.tab_info;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

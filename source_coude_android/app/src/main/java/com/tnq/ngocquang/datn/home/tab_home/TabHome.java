@@ -133,6 +133,11 @@ public class TabHome extends Fragment {
         handler.postDelayed(runnable, 5000);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(runnable);
+    }
 
     private static void initCategory() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mView.getContext());

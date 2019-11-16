@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/custom_background"
     tools:context=".home.HomeActivity">
 
     <androidx.viewpager.widget.ViewPager
@@ -15,10 +16,16 @@
     </androidx.viewpager.widget.ViewPager>
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:backgroundTint="@android:color/holo_blue_bright"
-        android:id="@+id/tablayout"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/distance_8"
+        android:layout_marginRight="@dimen/distance_8">
+        <com.google.android.material.tabs.TabLayout
+            android:backgroundTint="@android:color/holo_blue_bright"
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
