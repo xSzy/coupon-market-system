@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login_register_user.LoginActivity"
-    android:theme="@style/LoginRegisterTheme"
+    android:theme="@style/NoActionBarTheme"
     android:padding="@dimen/distance_8">
 
 

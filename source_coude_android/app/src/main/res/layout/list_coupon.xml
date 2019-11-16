@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
+    android:id="@+id/cardView_list_coupon"
     android:layout_height="200dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/distance_8">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/distance_8"
+    app:cardCornerRadius="@dimen/distance_16">
 
     <RelativeLayout
         android:layout_width="match_parent"

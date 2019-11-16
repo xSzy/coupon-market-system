@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="130dp"
-    android:layout_height="match_parent" android:layout_margin="@dimen/distance_8"
-    android:background="@android:color/white">
+    android:layout_height="130dp" android:layout_margin="@dimen/distance_8"
+    android:background="@drawable/edt_default">
 
     <ImageView
         android:id="@+id/iconCategory"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="60dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/img_circle_default"
         android:scaleType="fitCenter"
         android:layout_centerInParent="true"/>
 

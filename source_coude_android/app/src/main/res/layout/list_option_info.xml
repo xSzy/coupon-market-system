@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="@dimen/distance_8"
+    app:cardCornerRadius="@dimen/distance_8">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <TextView
+           android:id="@+id/name_option_info"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="thong tin nguoi dung"
+           android:layout_marginLeft="@dimen/distance_8"
+           android:layout_centerVertical="true"
+           style="@style/text_medium"/>
+       <ImageView
+           android:id="@+id/icon_option_info"
+           android:src="@drawable/ic_next"
+           android:layout_width="45dp"
+           android:layout_height="45dp"
+           android:tint="@android:color/black"
+           android:layout_marginRight="@dimen/distance_8"
+           android:layout_centerVertical="true"
+           android:layout_alignParentRight="true"/>
+   </RelativeLayout>
+</androidx.cardview.widget.CardView>

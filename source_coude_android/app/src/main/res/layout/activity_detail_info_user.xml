@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.tab_info.InfoActivity">
-
-
+    tools:context=".home.tab_info.DetailInfoUser">
 
     <androidx.cardview.widget.CardView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/view2"
         app:cardCornerRadius="100dp"
-        android:layout_centerHorizontal="true"
-        android:shape="ring">
+        style="@style/image_circle">
 
         <ImageView
-            android:id="@+id/avatar_info"
+            android:id="@+id/avatar_info_detail"
             android:src="@drawable/ic_account_circle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,21 +22,22 @@
             android:scaleType="fitCenter"
             android:adjustViewBounds="true" />
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/name_user_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tran ngoc quang"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black"
-        android:layout_below="@id/view2"
-        android:layout_marginTop="@dimen/distance_8"
-        android:layout_centerHorizontal="true"/>
-
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/option_info"
+        android:id="@+id/list_info_user_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_user_info"/>
+        android:layout_marginTop="@dimen/distance_8"
+        android:layout_below="@id/view2"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+        android:backgroundTint="#71F0F0"
+        android:layout_margin="@dimen/distance_8"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="editInfoUser"/>
+
 </RelativeLayout>

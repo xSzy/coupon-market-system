@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -49,7 +51,10 @@ public class TrendCouponAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+
         View view = LayoutInflater.from(mContext).inflate(R.layout.list_coupon,container,false);
+        CardView mCardView = view.findViewById(R.id.cardView_list_coupon);
+        mCardView.setRadius(0);
         final ImageView image = view.findViewById(R.id.image_coupon);
         TextView couponValue = view.findViewById(R.id.coupon_value);
         TextView couponTitle = view.findViewById(R.id.coupon_title);

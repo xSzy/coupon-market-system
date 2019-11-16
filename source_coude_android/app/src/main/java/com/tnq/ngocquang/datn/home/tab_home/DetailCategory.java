@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,7 +45,7 @@ import java.util.Map;
 
 public class DetailCategory extends AppCompatActivity implements RecyclerViewClickListener {
 
-
+    private TextView mTitle;
     private RecyclerView mCategory;
     private RecyclerView mCouponsByCate;
     private ArrayList<Category> mListCategory;
@@ -67,14 +68,15 @@ public class DetailCategory extends AppCompatActivity implements RecyclerViewCli
         requestQueue = MyVolley.getInstance(this.getApplicationContext()).getRequestQueue();
         Intent intent = getIntent();
         Category category = intent.getParcelableExtra("category");
-        //
-        setTitle(category.getName());
+        // set title
+        mTitle.setText("Bạn đang xem " + category.getName());
         mListCategory = category.getSubCategory();
         initCategory();
         initCouponBegin(mListCategory.get(0).getId());
     }
 
     private void anhxa() {
+        mTitle = findViewById(R.id.title_category);
         mCategory = findViewById(R.id.recyclerViewCategoryDetail);
         mCouponsByCate = findViewById(R.id.recyclerViewCouponByCate);
         mProgressBar = findViewById(R.id.linlaheaderProgress);
@@ -161,7 +163,7 @@ public class DetailCategory extends AppCompatActivity implements RecyclerViewCli
     @Override
     public void recyclerViewListClicked(View v, int position) {
         if (mPrevView != null) {
-            mPrevView.setBackgroundColor(Color.WHITE);
+            mPrevView.setBackground(getResources().getDrawable(R.drawable.edt_default));
         }
         mPrevView = v;
         v.setBackgroundColor(Color.rgb(234, 255, 255));
