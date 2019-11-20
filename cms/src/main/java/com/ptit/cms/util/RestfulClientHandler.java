@@ -31,6 +31,7 @@ public class RestfulClientHandler
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			throw new Exception(Constant.EXCEPTION_INTERNAL_ERROR);
 		}
 		if(response.getStatusCode() != HttpStatus.OK)
 			throw new Exception("Status code " + response.getStatusCodeValue());

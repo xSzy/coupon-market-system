@@ -54,12 +54,13 @@ if (len(listPredict) == 0):
     print('No predict found')
 latestPredict = max(listPredict, key=os.path.getctime)
 
+predicts = np.load(latestPredict)
 
 def predict(file):
     filename = secure_filename(file.filename);
     imgpath = os.getcwd() + temppath + '\\' + filename
     file.save(imgpath)
-    predicts = np.load(latestPredict)
+    global predicts
     # img = skimage.io.imread(imgpath)
     img = kimage.load_img(imgpath, target_size=(224, 224))
     x = kimage.img_to_array(img)

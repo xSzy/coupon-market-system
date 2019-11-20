@@ -241,15 +241,15 @@ public class CouponController {
 	}
 	
 	@RequestMapping(value = "/coupon/findByImage", method = RequestMethod.POST)
-	public ResponseEntity<ResponseModel> findCouponByImage(@RequestPart MultipartFile file)
+	public ResponseEntity<ResponseModel> findCouponByImage(@RequestPart MultipartFile file, @RequestPart String limit)
 	{
 		ResponseModel response = new ResponseModel();
 		ErrorMessage errorMessage = new ErrorMessage();
-		
-		Object data = null;
+
+		List<Coupon> data = null;
 		try
 		{
-			data = couponService.findByImage(file);
+			data = couponService.findByImage(file, Integer.parseInt(limit));
 			response.setStatus(Constant.STATUS_SUCCESS);
 			response.setError(null);
 		} catch (Exception e)
