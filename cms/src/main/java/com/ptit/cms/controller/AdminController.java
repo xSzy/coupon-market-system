@@ -45,4 +45,29 @@ public class AdminController
 		response.setData(result);
 		return new ResponseEntity<ResponseModel>(response, result == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/trainModel", method = RequestMethod.POST)
+	public ResponseEntity<ResponseModel> trainModel()
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+
+		Map result = null;
+		try
+		{
+			result = adminService.trainModel();
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		}
+		catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(result);
+		return new ResponseEntity<ResponseModel>(response, result == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
 }
