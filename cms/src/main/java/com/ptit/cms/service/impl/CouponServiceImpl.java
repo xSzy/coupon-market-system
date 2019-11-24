@@ -128,11 +128,11 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public List<Coupon> getCouponByName(String query) throws Exception {
+	public List<Coupon> getCouponByName(int pageNum, int pageSize, String query) throws Exception {
 		query = "%" + query + "%";
 		query = query.toUpperCase();
 		try {
-			return couponDao.getCouponByName(query);
+			return couponDao.getCouponByName(query, new PageRequest(pageNum - 1, pageSize));
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

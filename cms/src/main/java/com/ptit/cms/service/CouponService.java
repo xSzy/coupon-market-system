@@ -21,7 +21,7 @@ public interface CouponService
 
 	Coupon getCouponById(int couponId) throws Exception;
 
-	List<Coupon> getCouponByName(String query) throws Exception;
+	List<Coupon> getCouponByName(int pageNum, int pageSize,String query) throws Exception;
 
 	List<Coupon> getCouponByClickcount(int number) throws Exception;
 

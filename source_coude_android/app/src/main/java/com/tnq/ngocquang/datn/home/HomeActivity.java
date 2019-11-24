@@ -1,9 +1,11 @@
 package com.tnq.ngocquang.datn.home;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,11 +14,18 @@ import android.view.MenuItem;
 import com.google.android.material.tabs.TabLayout;
 import com.tnq.ngocquang.datn.NotificationActivity;
 import com.tnq.ngocquang.datn.R;
+import com.tnq.ngocquang.datn.login_register_user.LoginActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
     TabLayout mTabLayout;
     ViewPager mViewPager;
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mViewPager.setCurrentItem(0);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
+                //  if tab info is displayed.
+                if(tab.getPosition() == 1){
+                    displayAlert();
+                }
             }
 
             @Override
@@ -46,6 +59,21 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void displayAlert(){
+        new AlertDialog.Builder(this)
+                .setTitle("")
+                .setMessage("Bạn phải đăng nhập để sử dụng chức năng")
+                .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Hủy", null)
+                .show();
     }
 
     private void anhxa(){

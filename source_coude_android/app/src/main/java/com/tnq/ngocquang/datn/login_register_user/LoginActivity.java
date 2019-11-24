@@ -26,7 +26,6 @@ import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
 import com.tnq.ngocquang.datn.home.tab_info.InfoActivity;
 import com.tnq.ngocquang.datn.R;
-import com.tnq.ngocquang.datn.home.tab_info.SendIntent;
 import com.tnq.ngocquang.datn.interface_.ISendIntent;
 import com.tnq.ngocquang.datn.model.Account;
 import com.tnq.ngocquang.datn.model.User;
@@ -34,8 +33,6 @@ import com.tnq.ngocquang.datn.model.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,10 +48,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPassWord;
     private LoginButton mLoginButton;
     private RequestQueue requestQueue;
-    private String url = Constant.hostname + Constant.loginAPI;
+    public static  String urlLogin = Constant.hostname + Constant.loginAPI;
     private String urlUpdateUser = Constant.hostname + Constant.updateUserAPI;
     private LoginFBCallBack mLoginFB;
-    private ISendIntent mSendIntent;
     private boolean isOK;
     @Override
     protected void onStart() {
@@ -84,25 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 //            }
 //        };
 
-        mSendIntent = new SendIntent(){
-            @Override
-            public void send(User user) {
-//                Log.d("AAA",user.getAccount().getUsername());
-                Log.d("AAA",user.getGender() + "");
-                Log.d("AAA",user.getAccount().getUsername() + "");
-                Log.d("AAA",user.getDob()+ "");
-                Intent intent = new Intent(LoginActivity.this,InfoActivity.class);
-                intent.putExtra("user",user);
-                Account account = user.getAccount();
-                Date dob = user.getDob();
-                DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-                String dobStr = dateFormat.format(dob);
-                intent.putExtra("dob",dobStr);
-                intent.putExtra("account",account);
-//                intent.putExtra("dob",dob);
-                startActivity(intent);
-            }
-        };
+
 
         loginByFacebook(mLoginFB);
     }
@@ -130,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                             user.setGender((object.getString("gender").equals("male")? 1 : 2));
                             String[] dob = object.getString("birthday").split("/");
                             Date date = new Date(Integer.parseInt(dob[2]), Integer.parseInt(dob[0]), Integer.parseInt(dob[1]) );
-                            user.setDob(date);
+//                            user.setDob(date);
                             mLoginFB.onSuccess(user);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -169,11 +147,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "bạn chưa nhập tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
         }
         else{
-            loginHandle(url,username, password,"" ,null,mSendIntent);
+            loginHandle(urlLogin,username, password,"" ,null);
         }
     }
 
-    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack, ISendIntent sendIntent){
+    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack){
         Map<String,String> params = new HashMap<>();
         params.put("username",userName);
         params.put("password",passWord);
@@ -185,12 +163,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 try {
                     String status = response.getString("status");
-                    if(status.equals("success")){
                         String data = response.getString("data");
                         Log.d("AAA",data);
                         User user = new Gson().fromJson(data,User.class);
-                        mSendIntent.send(user);
-                    }
+                    Intent intent = new Intent(LoginActivity.this,InfoActivity.class);
+                    intent.putExtra("user",user);
+                    startActivity(intent);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

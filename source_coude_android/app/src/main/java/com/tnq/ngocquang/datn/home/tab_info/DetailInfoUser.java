@@ -13,14 +13,29 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.adapter.InfoUserDetailAdapter;
+import com.tnq.ngocquang.datn.login_register_user.LoginActivity;
+import com.tnq.ngocquang.datn.login_register_user.LoginFBCallBack;
 import com.tnq.ngocquang.datn.model.InfoUser;
 import com.tnq.ngocquang.datn.model.User;
+import com.tnq.ngocquang.datn.support.MyVolley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailInfoUser extends AppCompatActivity {
 
@@ -29,17 +44,19 @@ public class DetailInfoUser extends AppCompatActivity {
     private ArrayList<InfoUser> mListInfoUser;
     private User mUser;
     private InfoUserDetailAdapter mAdapter;
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_info_user);
         anhxa();
+        requestQueue = MyVolley.getInstance(getApplicationContext()).getRequestQueue();
         Intent intent = getIntent();
         mUser = intent.getParcelableExtra("userDetail");
-        Log.d("AAA",mUser.getGender() + "");
-        Log.d("AAA",mUser.getAccount().getUsername() + "");
-        Log.d("AAA",mUser.getDob().toString() + "");
+        Log.d("AAA detail",mUser.getGender() + "");
+        Log.d("AAA detail",mUser.getAccount().getUsername() + "");
+        Log.d("AAA detail",mUser.getDob().toString() + "");
         if (mUser != null) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mAdapter = new InfoUserDetailAdapter(this, mListInfoUser);
@@ -48,7 +65,14 @@ public class DetailInfoUser extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loginHandle(LoginActivity.urlLogin,mUser.getAccount().getUsername(),mUser.getAccount().getPassword(),(mUser.getAccount().getUserId() != null) ? mUser.getAccount().getUserId() : "",null, this );
+    }
+
     private void initInfoUser(User user) {
+        mListInfoUser.clear();
         if (user.getAvatarUrl() != null) {
             Glide.with(this).load(Uri.parse(user.getAvatarUrl())).into(mAvatar);
         }
@@ -56,9 +80,6 @@ public class DetailInfoUser extends AppCompatActivity {
             mListInfoUser.add(new InfoUser("Họ và tên ", user.getName()));
         }
         if (user.getDob() != null) {
-//            Date dob = new Date()
-            Log.d("AAA", user.getDob().toString() + "");
-
             String content = String.valueOf(DateFormat.format("dd/MM/yyyy", user.getDob()));
             mListInfoUser.add(new InfoUser("Ngày sinh ", content));
         }
@@ -77,6 +98,7 @@ public class DetailInfoUser extends AppCompatActivity {
         if (user.getGender() == 1 || user.getGender() == 2) {
             mListInfoUser.add(new InfoUser("Giới tính ", (user.getGender() == 1) ? "Nam" : "Nữ"));
         }
+        mListInfoUser.add(new InfoUser("Chức vụ ", String.valueOf(user.getRole())));
         mAdapter.notifyDataSetChanged();
 
     }
@@ -89,6 +111,54 @@ public class DetailInfoUser extends AppCompatActivity {
     }
 
     public void editInfoUser(View view) {
-        Toast.makeText(this, "edit", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, EditInfoUser.class);
+        intent.putExtra("editinfouser",mUser);
+        startActivity(intent);
+    }
+
+    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack, final DetailInfoUser detailInfoUser){
+        Map<String,String> params = new HashMap<>();
+        params.put("username",userName);
+        params.put("password",passWord);
+        params.put("userId",userId);
+        final JSONObject jsonObject = new JSONObject(params);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    String status = response.getString("status");
+                    String data = response.getString("data");
+                    Log.d("AAA",data);
+                    mUser = new Gson().fromJson(data,User.class);
+                    detailInfoUser.initInfoUser(mUser);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(userId.isEmpty() && loginFBCallBack == null){
+                    Log.d("AAA", "login : "+ error.toString());
+                    Toast.makeText(DetailInfoUser.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    loginFBCallBack.registerNewAccount(userId);
+                }
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<>();
+                headers.put("Content-Type","application/json");
+                return headers;
+            }
+        };
+        request.setRetryPolicy( new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue.add(request);
+
     }
 }

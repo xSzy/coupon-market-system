@@ -1,5 +1,6 @@
 package com.tnq.ngocquang.datn.adapter;
 
+import android.animation.BidirectionalTypeConverter;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -20,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tnq.ngocquang.datn.R;
+import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.list_coupon.DetailCouponActivity;
 import com.tnq.ngocquang.datn.list_coupon.ListCoupon;
 import com.tnq.ngocquang.datn.model.Coupon;
+import com.tnq.ngocquang.datn.support.ConvertCouponValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,25 +82,19 @@ public class CouponAdapter extends RecyclerView.Adapter<CouponAdapter.ViewHolder
             int type = coupon.getType();
             double value = coupon.getValue();
             int valueType = coupon.getValuetype();
-            String couponValue = "- ";
-            // sale off by percent
-            if(type == 1){
-                couponValue += value + " %";
-            }
-            // sale off by money
-            else if(type == 2){
-                if(valueType == 0){
-                    couponValue += (int)(value * 1000) + " Vnd";
-                }
-                else if(valueType == 1){
-                    couponValue += value + " Usd";
-                }
-            }
+            String couponValue = ConvertCouponValue.convert(type,value,valueType);
             mCouponValue.setText(couponValue);
-            // demo
-            TypedArray image = itemView.getResources().obtainTypedArray(R.array.demo_icon_category);
-            Glide.with(mContext).load(image.getResourceId(0,0)).into(mImageCoupon);
-            image.recycle();
+            String urlImageCoupon = Constant.hostImage;
+            urlImageCoupon += coupon.getProduct().getProductImages().get(0).getImage();
+            Log.d("AAA",urlImageCoupon);
+            if(urlImageCoupon != null){
+                Glide.with(mContext).load(urlImageCoupon).into(mImageCoupon);
+            }else{
+                // demo
+                TypedArray image = itemView.getResources().obtainTypedArray(R.array.demo_icon_category);
+                Glide.with(mContext).load(image.getResourceId(0,0)).into(mImageCoupon);
+                image.recycle();
+            }
         }
 
 
