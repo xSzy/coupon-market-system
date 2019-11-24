@@ -40,4 +40,27 @@ public class ImageController
 		is.close();
 		return bytes;
 	}
+
+	@RequestMapping(value = "/avatar/{fileName}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+	public @ResponseBody byte[] getAvatar(@PathVariable String fileName) throws FileNotFoundException, IOException
+	{
+		String path = "\\public\\static\\avatar\\";
+		path = path +  fileName;
+		Resource resource = null;
+		InputStream is = null;
+		try
+		{
+			resource = new ClassPathResource(path);
+			is = new FileInputStream(resource.getFile());
+
+		} catch (IOException e)
+		{
+			path = "\\public\\static\\no-profile-picture-icon-12.jpg";
+			resource = new ClassPathResource(path);
+			is = new FileInputStream(resource.getFile());
+		}
+		byte[] bytes = IOUtils.toByteArray(is);
+		is.close();
+		return bytes;
+	}
 }

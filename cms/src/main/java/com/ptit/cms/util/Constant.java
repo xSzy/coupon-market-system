@@ -2,6 +2,13 @@ package com.ptit.cms.util;
 
 public class Constant
 {
+	//urls
+	public static final String API_PYTHON_HOME = "http://localhost:5000";
+
+	public static final String API_UPDATE_DATA = "/updateData";
+	public static final String API_TRAIN_MODEL = "/trainModel";
+	public static final String API_PREDICT = "/visualSearch";
+
 	//settings
 	public static final String IMAGE_UPLOAD_PATH = "C:\\CMS\\images\\";
 	
@@ -33,5 +40,8 @@ public class Constant
 	public static final String EXCEPTION_ACCOUNT_EXISTS = "username exists";
 	public static final String EXCEPTION_INCORRECT_LOGIN = "wrong username or password";
 	public static final String EXCEPTION_FILE_CORRUPT = "file corrupted";
-	
+	public static final String EXCEPTION_INTERNAL_ERROR = "internal server error";
+
+	//date format
+	public static final String DATE_FORMAT_NO_SEPERATOR = "yyyyMMddHHmmssSSS";
 }

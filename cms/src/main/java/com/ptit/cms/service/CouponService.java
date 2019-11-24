@@ -2,8 +2,6 @@ package com.ptit.cms.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ptit.cms.model.entity.Coupon;
@@ -29,6 +27,6 @@ public interface CouponService
 
 	boolean deleteCoupon(Coupon coupon);
 
-	Object findByImage(MultipartFile file) throws Exception;
+	List<Coupon> findByImage(MultipartFile file, int limit) throws Exception;
 
 }

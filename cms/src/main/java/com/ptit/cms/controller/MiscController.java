@@ -44,4 +44,28 @@ public class MiscController
 		response.setData(path);
 		return new ResponseEntity<ResponseModel>(response, path == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/avatar/upload", method = RequestMethod.POST)
+	public ResponseEntity<ResponseModel> uploadAvatar(@RequestPart MultipartFile file)
+	{
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+
+		String path = null;
+		try
+		{
+			path = miscService.saveAvatar(file);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e)
+		{
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(path);
+		return new ResponseEntity<ResponseModel>(response, path == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
 }

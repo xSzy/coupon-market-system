@@ -12,7 +12,7 @@ import com.ptit.cms.model.entity.Category;
 import com.ptit.cms.model.entity.Coupon;
 
 @Repository
-public interface CouponDao extends JpaRepository<Coupon, Integer>,PagingAndSortingRepository<Coupon, Integer>
+public interface CouponDao extends JpaRepository<Coupon, Integer>,PagingAndSortingRepository<Coupon, Integer>, ImageDao
 {
 	@Query("SELECT c FROM Coupon c WHERE c.category = ?1")
 	List<Coupon> getCouponByCategory(Category c,Pageable pageable);
