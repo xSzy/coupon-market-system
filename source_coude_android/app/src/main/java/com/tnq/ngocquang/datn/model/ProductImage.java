@@ -3,10 +3,19 @@ package com.tnq.ngocquang.datn.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-class ProductImage implements Parcelable {
+
+public class ProductImage implements Parcelable {
     private String image;
 
     public ProductImage() {
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public ProductImage(String image) {

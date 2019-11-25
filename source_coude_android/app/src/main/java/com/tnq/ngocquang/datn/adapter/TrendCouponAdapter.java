@@ -23,6 +23,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.tnq.ngocquang.datn.R;
+import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.list_coupon.DetailCouponActivity;
 import com.tnq.ngocquang.datn.model.Coupon;
 import com.tnq.ngocquang.datn.support.ConvertCouponValue;
@@ -59,10 +60,17 @@ public class TrendCouponAdapter extends PagerAdapter {
         TextView couponValue = view.findViewById(R.id.coupon_value);
         TextView couponTitle = view.findViewById(R.id.coupon_title);
         final Coupon coupon = mListCoupon.get(position);
-        // this is demo
-        TypedArray imageT = view.getResources().obtainTypedArray(R.array.demo_icon_category);
-        Glide.with(mContext).load(imageT.getResourceId(0,0)).into(image);
-        imageT.recycle();
+        String urlImageCoupon = Constant.hostImage;
+        urlImageCoupon += coupon.getProduct().getProductImages().get(0).getImage();
+        Log.d("AAA",urlImageCoupon);
+        if(urlImageCoupon != null){
+            Glide.with(mContext).load(urlImageCoupon).into(image);
+        }else{
+            // demo
+            TypedArray img = view.getResources().obtainTypedArray(R.array.demo_icon_category);
+            Glide.with(mContext).load(img.getResourceId(0,0)).into(image);
+            img.recycle();
+        }
 
         // convert coupon value///////////////////////
         String couponV = ConvertCouponValue.convert(coupon.getType(),coupon.getValue(),coupon.getValuetype());

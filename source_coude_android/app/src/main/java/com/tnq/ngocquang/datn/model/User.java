@@ -3,11 +3,12 @@ package com.tnq.ngocquang.datn.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class User implements Parcelable {
-
-    private Account account;
+    private int id;
+    Account account;
     private String avatarUrl;
     private String name;
     private Date dob;
@@ -16,46 +17,19 @@ public class User implements Parcelable {
     private String phoneNumber;
     private String citizenId;
     private int gender; // 1 : male // 2 : female
-    private int role;
+    private int role; // 1 : user // 2 : admin
 
     public User() {
     }
 
-    public User(Account account, String avatarUrl, String name, Date dob, String email, String address, String phoneNumber, String citizenId, int gender, int role) {
-        this.account = account;
-        this.avatarUrl = avatarUrl;
-        this.name = name;
-        this.dob = dob;
-        this.email = email;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.citizenId = citizenId;
-        this.gender = gender;
-        this.role = role;
+
+    public int getId() {
+        return id;
     }
 
-    protected User(Parcel in) {
-        avatarUrl = in.readString();
-        name = in.readString();
-        email = in.readString();
-        address = in.readString();
-        phoneNumber = in.readString();
-        citizenId = in.readString();
-        gender = in.readInt();
-        role = in.readInt();
+    public void setId(int id) {
+        this.id = id;
     }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     public Account getAccount() {
         return account;
@@ -88,6 +62,7 @@ public class User implements Parcelable {
     public void setDob(Date dob) {
         this.dob = dob;
     }
+
 
     public String getEmail() {
         return email;
@@ -137,15 +112,48 @@ public class User implements Parcelable {
         this.role = role;
     }
 
+    protected User(Parcel in) {
+        id  = in.readInt();
+        account = in.readParcelable(Account.class.getClassLoader());
+        avatarUrl = in.readString();
+        name = in.readString();
+        dob = new Date(in.readLong());
+        email = in.readString();
+        address = in.readString();
+        phoneNumber = in.readString();
+        citizenId = in.readString();
+        gender = in.readInt();
+        role = in.readInt();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int flag) {
+        parcel.writeInt(id);
+        parcel.writeParcelable(account, flag);
         parcel.writeString(avatarUrl);
         parcel.writeString(name);
+        if(dob != null){
+            parcel.writeLong(dob.getTime());
+        }else{
+            parcel.writeLong(Calendar.getInstance().getTimeInMillis());
+        }
         parcel.writeString(email);
         parcel.writeString(address);
         parcel.writeString(phoneNumber);

@@ -34,12 +34,16 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCouponByCate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/cardView_list_category"
-        android:layout_marginTop="@dimen/distance_8"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
     <RelativeLayout
         android:id="@+id/linlaheaderProgress"

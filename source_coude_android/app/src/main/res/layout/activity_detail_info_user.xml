@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
     tools:context=".home.tab_info.DetailInfoUser">
 
     <androidx.cardview.widget.CardView
@@ -35,9 +36,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_edit"
         android:backgroundTint="#71F0F0"
-        android:layout_margin="@dimen/distance_8"
+        android:layout_marginBottom="@dimen/distance_8"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
         android:onClick="editInfoUser"/>
 
 </RelativeLayout>

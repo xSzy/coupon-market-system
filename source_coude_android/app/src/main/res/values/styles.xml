@@ -27,4 +27,9 @@
         <item name="android:shape">ring</item>
     </style>
 
+    <style name="edt_search" parent="Widget.AppCompat.EditText">
+        <item name="android:gradientRadius">12dp</item>
+        <item name="android:background">#F8F7F7</item>
+    </style>
+
 </resources>

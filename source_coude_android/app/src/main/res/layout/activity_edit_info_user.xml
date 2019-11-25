@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.tab_info.EditInfoUser">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/view2"
+        app:cardCornerRadius="100dp"
+        style="@style/image_circle">
+
+        <ImageView
+            android:id="@+id/avatar_info_edit"
+            android:src="@drawable/ic_account_circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_circle_default"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true" />
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/distance_8"
+        android:layout_below="@id/view2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/name_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/distance_8"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="họ và tên"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_alignRight="@id/name_info_edit"/>
+
+            <EditText
+                android:id="@+id/dob_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="true"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_below="@id/name_info_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="ngày sinh"
+                android:layout_alignRight="@id/dob_info_edit"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_below="@id/name_info_edit"/>
+
+            <EditText
+                android:id="@+id/email_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_below="@id/dob_info_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="email"
+                android:layout_alignRight="@id/dob_info_edit"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_below="@id/dob_info_edit"/>
+
+            <EditText
+                android:id="@+id/address_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_below="@id/email_info_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="địa chỉ"
+                android:layout_alignRight="@id/dob_info_edit"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_below="@id/email_info_edit"/>
+            <EditText
+                android:id="@+id/phone_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:inputType="phone"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_below="@id/address_info_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="liên hệ"
+                android:layout_alignRight="@id/dob_info_edit"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_below="@id/address_info_edit"/>
+
+            <EditText
+                android:id="@+id/citiId_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:inputType="number"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_below="@id/phone_info_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="số chứng minh"
+                android:layout_alignRight="@id/dob_info_edit"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_below="@id/phone_info_edit"/>
+
+            <EditText
+                android:id="@+id/gender_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_below="@id/citiId_info_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="giới tính"
+                android:layout_alignRight="@id/dob_info_edit"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_below="@id/citiId_info_edit"/>
+
+            <EditText
+                android:id="@+id/role_info_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/distance_8"
+                android:layout_below="@id/gender_info_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="chức vụ"
+                android:inputType="number"
+                android:layout_alignRight="@id/dob_info_edit"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginRight="@dimen/distance_8"
+                android:layout_below="@id/gender_info_edit"/>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_done"
+        android:layout_marginBottom="@dimen/distance_8"
+        android:backgroundTint="#71F0F0"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="doneEditInfoUser"/>
+
+
+</RelativeLayout>

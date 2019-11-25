@@ -18,7 +18,7 @@ public interface CouponDao extends JpaRepository<Coupon, Integer>,PagingAndSorti
 	List<Coupon> getCouponByCategory(Category c,Pageable pageable);
 	
 	@Query("SELECT c FROM Coupon c WHERE UPPER(c.title) LIKE ?1")
-	List<Coupon> getCouponByName(String query);
+	List<Coupon> getCouponByName(String query,Pageable pageable);
 	
 	@Query("SELECT c FROM Coupon c ORDER BY c.clickCount DESC")
 	List<Coupon> getCouponByClickcount(Pageable pageable);

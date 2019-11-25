@@ -4,10 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.TabSearch">
-    <TextView
-        android:layout_width="wrap_content"
+    android:background="@drawable/custom_background"
+    tools:context=".home.tab_search.TabSearch"
+    android:padding="@dimen/distance_8">
+
+
+   <androidx.cardview.widget.CardView
+       android:id="@+id/tab_search_cardView1"
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       app:cardCornerRadius="12dp">
+       <EditText
+           android:id="@+id/search_text_coupon"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:paddingLeft="@dimen/distance_8"
+           android:hint="bạn muốn tìm kiếm coupon ?"
+           android:textColorHint="@android:color/black"
+           android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+   </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tab_search_cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@id/tab_search_cardView1"
+        android:layout_marginTop="@dimen/distance_16">
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCouponBySearch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" search"/>
+        android:layout_below="@id/tab_search_cardView2"
+        android:layout_marginTop="@dimen/distance_8">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
