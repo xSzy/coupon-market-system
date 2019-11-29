@@ -43,7 +43,6 @@ public class Account
 		this.username = username;
 	}
 
-//	@JsonIgnore
 	public String getPassword()
 	{
 		return password;

@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Account implements Parcelable {
+    private int id;
     private String username;
     private String password;
     private String userId;
@@ -11,13 +12,15 @@ public class Account implements Parcelable {
     public Account() {
     }
 
-    public Account(String username, String password, String userId) {
+    public Account(int id, String username, String password, String userId) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.userId = userId;
     }
 
     protected Account(Parcel in) {
+        id = in.readInt();
         username = in.readString();
         password = in.readString();
         userId = in.readString();
@@ -34,6 +37,15 @@ public class Account implements Parcelable {
             return new Account[size];
         }
     };
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -66,6 +78,7 @@ public class Account implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(username);
         parcel.writeString(password);
         parcel.writeString(userId);

@@ -52,7 +52,6 @@ public class User
 	@Column(name = "phonenumber")
 	private String phoneNumber;
 
-	@JsonIgnore
 	@Column(name = "citizenid")
 	private String citizenId;
 

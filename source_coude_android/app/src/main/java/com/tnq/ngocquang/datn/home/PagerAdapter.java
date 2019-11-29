@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.tnq.ngocquang.datn.home.tab_home.TabHome;
 import com.tnq.ngocquang.datn.home.tab_info.TabInfo;
+import com.tnq.ngocquang.datn.home.tab_search.TabSearch;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private int mNumOfTabs;

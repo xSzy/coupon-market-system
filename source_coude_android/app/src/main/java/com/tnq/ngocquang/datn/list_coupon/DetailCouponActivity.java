@@ -2,11 +2,13 @@ package com.tnq.ngocquang.datn.list_coupon;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,14 +17,22 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tnq.ngocquang.datn.R;
+import com.tnq.ngocquang.datn.adapter.ImageDetailCouponAdapter;
+import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.model.Coupon;
+import com.tnq.ngocquang.datn.model.ProductImage;
 import com.tnq.ngocquang.datn.support.ConvertCouponValue;
+
+import java.util.ArrayList;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class DetailCouponActivity extends AppCompatActivity {
 
     private TextView mTitle;
+    private ViewPager mListImageCouponPager;
+    private CircleIndicator mIndicator;
     private TextView mDescription;
-    private ImageView mImage;
     private ImageView mShare;
     private TextView mCouponValue;
     private TextView mClickCount;
@@ -30,6 +40,11 @@ public class DetailCouponActivity extends AppCompatActivity {
     private TextView mAddress;
     private ImageView mMap;
     private Coupon coupon;
+    private Handler mHandler;
+    private Runnable mRunable;
+    private ArrayList<ProductImage> mListImage;
+    private int mCurrentItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +59,34 @@ public class DetailCouponActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacks(mRunable);
+    }
+
     private void initData(final Coupon coupon) {
         mTitle.setText(coupon.getTitle());
         mDescription.setText(coupon.getDescription());
-        // this is demo...
-        TypedArray image = getResources().obtainTypedArray(R.array.demo_icon_category);
-        Glide.with(this).load(image.getResourceId(0, 0)).into(mImage);
-        image.recycle();
+        mListImage = coupon.getProduct().getProductImages();
+        ImageDetailCouponAdapter imageDetailCouponAdapter = new ImageDetailCouponAdapter(this,mListImage);
+        mListImageCouponPager.setAdapter(imageDetailCouponAdapter);
+        mIndicator.setViewPager(mListImageCouponPager);
+        imageDetailCouponAdapter.registerDataSetObserver(mIndicator.getDataSetObserver());
+        mHandler = new Handler();
+        mRunable = new Runnable() {
+            @Override
+            public void run() {
+                mCurrentItem = mListImageCouponPager.getCurrentItem();
+                mCurrentItem ++;
+                if(mCurrentItem >= mListImageCouponPager.getAdapter().getCount()){
+                    mCurrentItem = 0;
+                }
+                mListImageCouponPager.setCurrentItem(mCurrentItem,true);
+                mHandler.postDelayed(mRunable,5000);
+            }
+        };
+        mHandler.postDelayed(mRunable,5000);
         // convert coupon value //////////////////////
         String couponValue = ConvertCouponValue.convert(coupon.getType(),coupon.getValue(),coupon.getValuetype());
 
@@ -68,14 +104,16 @@ public class DetailCouponActivity extends AppCompatActivity {
 
     private void anhxa() {
         mTitle = findViewById(R.id.coupon_detail_title);
+        mListImageCouponPager = findViewById(R.id.image_coupon_pager);
+        mIndicator = findViewById(R.id.indicatior_image);
         mDescription = findViewById(R.id.description_detail_coupon);
-        mImage = findViewById(R.id.image_detail_coupon);
         mShare = findViewById(R.id.share_detail_coupon);
         mCouponValue = findViewById(R.id.coupon_detail_value);
         mClickCount = findViewById(R.id.count_click_detail_coupon);
         mAddress = findViewById(R.id.address_detail_coupon);
         mMap = findViewById(R.id.map_detail_coupon);
         mContact = findViewById(R.id.contact_detail_coupon);
+        mListImage = new ArrayList<>();
     }
 
     public void shareCoupon(View view)

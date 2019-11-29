@@ -1,6 +1,7 @@
 package com.tnq.ngocquang.datn.constant;
 
 public class Constant {
+    public static final String hostImage = "http://192.168.1.13:8080/resources/";
     public static final String hostname = "http://192.168.1.13:8080/cms";
     public static final String loginAPI =  "/user/login";
     public static final String registerAPI = "/user/register";
@@ -9,4 +10,6 @@ public class Constant {
     public static final String categoryGetAllAPI = "/category/getAll";
     public static final String findCouponByCateAPI = "/coupon/findByCategory";
     public static final String trendCouponAPI = "/coupon/getMostViewed";
+    public static final String findByNameAPI = "/coupon/findByName";
+    public static final String errorMessage = "có lỗi xảy ra!";
 }

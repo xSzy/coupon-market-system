@@ -152,13 +152,13 @@ public class CouponController {
 	}
 
 	@RequestMapping(value = "/coupon/findByName", method = RequestMethod.GET)
-	public ResponseEntity<ResponseModel> getCouponByName(@RequestParam String query) {
+	public ResponseEntity<ResponseModel> getCouponByName(@RequestParam int pageNum, @RequestParam int pageSize, @RequestParam String query) {
 		ResponseModel response = new ResponseModel();
 		ErrorMessage errorMessage = new ErrorMessage();
 
 		List<Coupon> listCoupon = null;
 		try {
-			listCoupon = couponService.getCouponByName(query);
+			listCoupon = couponService.getCouponByName(pageNum,pageSize,query);
 			response.setStatus(Constant.STATUS_SUCCESS);
 			response.setError(null);
 		} catch (Exception e) {

@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme">
-        <activity android:name=".home.tab_info.DetailInfoUser"></activity>
+        <activity android:name=".home.tab_info.EditInfoUser"></activity>
+        <activity android:name=".home.tab_info.DetailInfoUser" />
         <activity android:name=".home.tab_info.InfoActivity" />
         <activity android:name=".home.tab_home.DetailCategory" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".home.tab_info.TabInfo" />
-        <activity android:name=".home.TabSearch" />
+        <activity android:name=".home.tab_search.TabSearch" />
         <activity android:name=".home.tab_home.TabHome" />
         <activity android:name=".home.HomeActivity">
             <intent-filter>
