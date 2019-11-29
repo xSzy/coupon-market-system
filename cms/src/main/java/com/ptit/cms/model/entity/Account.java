@@ -43,13 +43,13 @@ public class Account
 		this.username = username;
 	}
 
-	@JsonIgnore
+//	@JsonIgnore
 	public String getPassword()
 	{
 		return password;
 	}
 
-	@JsonProperty
+//	@JsonProperty
 	public void setPassword(String password)
 	{
 		this.password = password;

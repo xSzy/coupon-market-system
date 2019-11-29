@@ -12,10 +12,13 @@ from keras.models import Model
 from keras.models import load_model
 from keras.optimizers import Nadam
 from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.python.keras.backend import set_session
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 graph = tf.get_default_graph()
+sess = tf.Session()
+set_session(sess)
 
 imagelist = []
 is_generating = False
@@ -53,6 +56,7 @@ def prepredict():
     if (len(listFiles) == 0):
         return 0
     latestModel = max(listFiles, key=os.path.getctime)
+    print("[INFO] Pre-predict is now using model : " + latestModel)
 
     # Get images
     datagen = ImageDataGenerator()
@@ -65,17 +69,19 @@ def prepredict():
 
     t1 = threading.Thread(target=predict_job, args=(latestModel, image_it))
     t1.start()
-
+    print("[INFO] Pre-predicting started.")
     return 1
 
 
 def predict_job(modelpath, imageiterator):
     global savedatapath
     with graph.as_default():
+        set_session(sess)
         model = load_model(modelpath)
-        predicts = model.predict_generator(imageiterator, verbose=1)
+        predicts = model.predict_generator(imageiterator, verbose=1, steps=len(imageiterator.filepaths))
 
     # save predicts to file
+    print("[INFO] Pre-predicting finished, attemping to save to file.")
     predicts = np.reshape(predicts, (predicts.shape[0], 100352))
     savefilename = datetime.now().strftime('%Y%m%d%H%M%S') + '_data.npy'
     np.save(os.getcwd() + savedatapath + '\\' + savefilename, predicts)
@@ -85,7 +91,7 @@ def predict_job(modelpath, imageiterator):
         pickle.dump(imagelist, filewrite)
     global is_generating
     is_generating = False
-    print('Data pre-predict done')
+    print('[INFO] Data pre-predict done')
 
 
 def trainData():
@@ -102,10 +108,10 @@ def trainData():
 
 def train_job():
     datagen = ImageDataGenerator(
-        rotation_range=20,
-        width_shift_range=0.2,
-        height_shift_range=0.2,
-        horizontal_flip=True
+        # rotation_range=20,
+        # width_shift_range=0.2,
+        # height_shift_range=0.2,
+        # horizontal_flip=True
     )
     imagedata_directory = os.getcwd();
     imagedata_directory = imagedata_directory.replace('cmspythonbackend',

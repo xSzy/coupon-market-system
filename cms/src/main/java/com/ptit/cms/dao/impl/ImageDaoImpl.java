@@ -11,7 +11,9 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.math.BigInteger;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class ImageDaoImpl implements ImageDao {
@@ -19,9 +21,9 @@ public class ImageDaoImpl implements ImageDao {
     private EntityManager entityManager;
 
     @Override
-    public List<BigInteger> getCouponByImage(List<ImageResponse> listImage, int limit) {
-        String sql = "SELECT DISTINCT " +
-                "    ( tmp.id )  " +
+    public Set<BigInteger> getCouponByImage(List<ImageResponse> listImage) {
+        String sql = "SELECT " +
+                "    tmp.id  " +
                 "FROM " +
                 "    ( " +
                 "    SELECT " +
@@ -36,12 +38,11 @@ public class ImageDaoImpl implements ImageDao {
                 "    ) tmp  " +
                 "ORDER BY " +
                 "CASE addSql2 ELSE 100000  " +
-                "END " +
-                "LIMIT " + limit;
+                "END ";
         StringBuilder addSql1Builder = new StringBuilder("");
         StringBuilder addSql2Builder = new StringBuilder("");
         ObjectMapper mapper = new ObjectMapper();
-        int end = limit*50 < listImage.size() ? limit*50 : listImage.size();
+        int end = listImage.size();
         for(int i = 0; i < end; i++)
         {
             listImage.set(i, mapper.convertValue(listImage.get(i), ImageResponse.class));
@@ -60,6 +61,8 @@ public class ImageDaoImpl implements ImageDao {
             query = query.setParameter(end+i+1, listImage.get(i).getImage());
         }
         List<BigInteger> listIds = query.getResultList();
-        return listIds;
+        System.out.println(listIds);
+        Set<BigInteger> set = new LinkedHashSet<>(listIds);
+        return set;
     }
 }

@@ -187,10 +187,11 @@ public class CouponServiceImpl implements CouponService {
 			throw new Exception(Constant.EXCEPTION_FILE_CORRUPT);
 		}
 		body.add("file", fileAsResources);
+		body.add("limit", limit);
 		Map response = RestfulClientHandler.postForObject(Constant.API_PYTHON_HOME + Constant.API_PREDICT, body, MediaType.MULTIPART_FORM_DATA);
 //		Map response = RestfulClientHandler.test();
 		List<ImageResponse> responseData = (List<ImageResponse>) response.get("result");
-		List<BigInteger> listCouponIds = couponDao.getCouponByImage(responseData, limit);
+		Set<BigInteger> listCouponIds = couponDao.getCouponByImage(responseData);
 		List<Coupon> listCoupon = new ArrayList<>();
 		for(BigInteger id : listCouponIds)
 			listCoupon.add(couponDao.getOne(id.intValue()));
