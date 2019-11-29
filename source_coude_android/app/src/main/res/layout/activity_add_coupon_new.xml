@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
+    tools:context=".home.tab_info.manage_coupon.AddCouponNew">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_title_addcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/distance_8"
+                app:cardCornerRadius="@dimen/distance_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/title_addcoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/distance_16"
+                        android:hint="Tiêu đề"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1" />
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_type_addcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/cardView_title_addcoupon"
+                android:layout_margin="@dimen/distance_8"
+                app:cardCornerRadius="@dimen/distance_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Spinner
+                        android:id="@+id/type_addcoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toRightOf="@id/title_type_addcoupon"
+                        android:background="@drawable/edt_default"
+                        android:layout_margin="@dimen/distance_8"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/title_type_addcoupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/distance_16"
+                        android:gravity="center_vertical"
+                        android:text=" Loại ưu đãi bạn chọn "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_valuetype_addcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/cardView_type_addcoupon"
+                android:layout_margin="@dimen/distance_8"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/distance_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Spinner
+                        android:id="@+id/valuetype_addcoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/distance_8"
+                        android:background="@drawable/edt_default"
+                        android:layout_toRightOf="@id/title_valuetype_addcoupon"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/title_valuetype_addcoupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/distance_16"
+                        android:gravity="center_vertical"
+                        android:text="Bạn muốn ưu đãi theo "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_value_addcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/cardView_valuetype_addcoupon"
+                android:layout_margin="@dimen/distance_8"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/distance_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/value_addcoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        android:layout_marginLeft="@dimen/distance_16"
+                        android:hint="Giá trị ưu đãi " />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_description_addcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardView_value_addcoupon"
+                android:layout_margin="@dimen/distance_8"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/distance_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/description_addcoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/distance_16"
+                        android:hint="Mô tả"
+                        android:maxLines="20"
+                        android:maxLength="1500"
+                        android:minHeight="60dp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_category_addcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/cardView_description_addcoupon"
+                android:layout_margin="@dimen/distance_8"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/distance_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Spinner
+                        android:id="@+id/category_addcoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/distance_8"
+                        android:layout_toRightOf="@id/title_category_addcoupon"
+                        android:background="@drawable/edt_default"
+                        android:spinnerMode="dropdown" />
+
+                    <TextView
+                        android:id="@+id/title_category_addcoupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/distance_16"
+                        android:gravity="center_vertical"
+                        android:text="Ưu đãi thuộc thể loại "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_product_addcoupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardView_category_addcoupon"
+                android:layout_margin="@dimen/distance_8"
+                android:visibility="visible"
+                android:minHeight="60dp"
+                app:cardCornerRadius="@dimen/distance_16">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/change_state_product_group_addcoupon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/group_parent_product_addcoupon"
+                        android:layout_alignRight="@id/group_parent_product_addcoupon"
+                        android:src="@drawable/ic_add" />
+
+                    <TextView
+                        android:id="@+id/title_product_addcoupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/distance_16"
+                        android:layout_marginTop="@dimen/distance_16"
+                        android:text="Ưu đãi thuộc về sản phẩm"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/group_parent_product_addcoupon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title_product_addcoupon"
+                        app:cardCornerRadius="@dimen/distance_16">
+
+                        <ScrollView
+                            android:id="@+id/scroll_product_addcoupon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+
+                            <RelativeLayout
+                                android:id="@+id/group_product_addcoupon"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edt_default"
+                                android:visibility="visible">
+
+                                <EditText
+                                    android:id="@+id/name_product_addcoupon"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/distance_16"
+                                    android:hint="Tên của sản phẩm"
+                                    android:maxLines="1"
+                                    android:inputType="textEmailAddress"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                                <EditText
+                                    android:id="@+id/manufacturer_product_addcoupon"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/name_product_addcoupon"
+                                    android:layout_marginLeft="@dimen/distance_16"
+                                    android:hint="Nhà sản xuất"
+                                    android:maxLines="1"
+                                    android:inputType="textEmailAddress"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@android:color/black" />
+
+                                <EditText
+                                    android:id="@+id/contact_product_addcoupon"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="text"
+                                    android:layout_below="@id/manufacturer_product_addcoupon"
+                                    android:layout_marginLeft="@dimen/distance_16"
+                                    android:hint="Thông tin liên lạc"
+                                    android:maxLines="1"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@android:color/black" />
+
+                                <ImageView
+                                    android:id="@+id/pickImage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignTop="@id/title_image_product_addcoupon"
+                                    android:layout_below="@+id/title_image_product_addcoupon"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="@dimen/distance_16"
+                                    android:onClick="pickImage"
+                                    android:src="@drawable/ic_image" />
+
+                                <TextView
+                                    android:id="@+id/title_image_product_addcoupon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/contact_product_addcoupon"
+                                    android:layout_marginLeft="@dimen/distance_16"
+                                    android:layout_marginTop="@dimen/distance_16"
+                                    android:text="Chọn hình ảnh cho sản phẩm "
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="@android:color/black" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/list_image_product_addcoupon"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/pickImage"
+                                    android:layout_margin="@dimen/distance_8" />
+
+
+                            </RelativeLayout>
+                        </ScrollView>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/doneAddCoupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_done"
+        android:layout_marginBottom="@dimen/distance_8"
+        android:backgroundTint="#71F0F0"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:onClick="doneAddCouponNew"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/uploadImageAddCoupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_upfile"
+        android:layout_marginBottom="@dimen/distance_8"
+        android:backgroundTint="#71F0F0"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="uploadImage"/>
+
+</RelativeLayout>

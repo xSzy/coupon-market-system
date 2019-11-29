@@ -1,44 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/custom_background"
+
     tools:context=".home.tab_search.TabSearch"
-    android:padding="@dimen/distance_8">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-   <androidx.cardview.widget.CardView
-       android:id="@+id/tab_search_cardView1"
-       android:layout_width="match_parent"
-       android:layout_height="40dp"
-       app:cardCornerRadius="12dp">
-       <EditText
-           android:id="@+id/search_text_coupon"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:paddingLeft="@dimen/distance_8"
-           android:hint="bạn muốn tìm kiếm coupon ?"
-           android:textColorHint="@android:color/black"
-           android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-   </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/tab_search_cardView2"
+    <RelativeLayout
+        android:id="@+id/children_layout_tabsarch"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_below="@id/tab_search_cardView1"
-        android:layout_marginTop="@dimen/distance_16">
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCouponBySearch"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <ImageView
+            android:src="@drawable/ic_image"
+            android:id="@+id/image_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_search_image"
+            android:src="@drawable/ic_search"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/distance_16"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#71F0F0"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/parent_layout_tabsearch"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="visible"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tab_search_cardView2"
-        android:layout_marginTop="@dimen/distance_8">
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_background"
 
-    </androidx.recyclerview.widget.RecyclerView>
+        android:padding="@dimen/distance_8">
+
+        <RelativeLayout
+            android:id="@+id/group_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_search"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_toLeftOf="@id/camera_search"
+                app:cardCornerRadius="12dp">
+                <EditText
+                    android:id="@+id/search_text_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/distance_8"
+                    android:minHeight="50dp"
+                    android:hint="bạn muốn tìm kiếm coupon ?"
+                    android:textColorHint="@android:color/black"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:imeOptions="actionSearch"/>
+
+            </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/camera_search"
+                android:layout_marginTop="2dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_camera"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/tab_search_cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_below="@id/group_search"
+            android:layout_marginTop="@dimen/distance_16">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/distance_8">
+                <TextView
+                    android:id="@+id/key_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Từ khóa :"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/pen_key_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/key_search"
+                    app:cardCornerRadius="@dimen/distance_16"
+                    android:layout_marginTop="@dimen/distance_16">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:text=" bút"
+                        android:textStyle="italic"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:background="@drawable/edt_default"
+                        />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/chair_key_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/pen_key_search"
+                    android:layout_alignTop="@id/pen_key_search"
+                    app:cardCornerRadius="@dimen/distance_16"
+                    android:layout_marginLeft="@dimen/distance_8">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:text=" ghế "
+                        android:textStyle="italic"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:background="@drawable/edt_default"
+                        />
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/dress_key_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/chair_key_search"
+                    android:layout_alignTop="@id/chair_key_search"
+                    app:cardCornerRadius="@dimen/distance_16"
+                    android:layout_marginLeft="@dimen/distance_8">
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:text=" váy "
+                        android:textStyle="italic"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:background="@drawable/edt_default"
+                        />
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCouponBySearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_search_cardView2"
+            android:layout_marginTop="@dimen/distance_8">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <RelativeLayout
+            android:id="@+id/loading_progress_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/pbHeaderProgress"
+                style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

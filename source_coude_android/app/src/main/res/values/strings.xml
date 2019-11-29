@@ -18,5 +18,62 @@
 
 
     <string name="fb_login_protocol_scheme">fb2579909545564416</string>
+    <string-array name="type_coupon">
+        <item> Free ship</item>
+        <item> Giảm giá</item>
+    </string-array>
+    <string-array name="define_type_coupon">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="valuetype_coupon">
+        <item>Giảm %</item>
+        <item>Giảm tiền(VND)</item>
+        <item>Giảm tiền(USD)</item>
+    </string-array>
+    <string-array name="define_valuetype_coupon">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="category_coupon">
+        <item>Máy điều hòa</item>
+        <item>Tủ lạnh</item>
+        <item>Lò vi sóng</item>
+        <item>Nồi cơm điện</item>
+        <item>Máy giặt</item>
+        <item>Áo</item>
+        <item>Quần</item>
+        <item>Váy</item>
+        <item>Bàn</item>
+        <item>Ghế</item>
+        <item>Bút</item>
+    </string-array>
+    <string-array name="define_description_category_coupon">
+        <item>air-conditioner</item>
+        <item>fridge</item>
+        <item>microwave</item>
+        <item>ricecooker</item>
+        <item>washing-machine</item>
+        <item>top-wear</item>
+        <item>bottom-wear</item>
+        <item>dress</item>
+        <item>desk</item>
+        <item>chair</item>
+        <item>pen</item>
+    </string-array>
+    <string-array name="define_category_coupon">
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>58</item>
+        <item>59</item>
+        <item>61</item>
+    </string-array>
 
 </resources>

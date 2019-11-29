@@ -15,6 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.adapter.ImageDetailCouponAdapter;
@@ -22,8 +29,13 @@ import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.model.Coupon;
 import com.tnq.ngocquang.datn.model.ProductImage;
 import com.tnq.ngocquang.datn.support.ConvertCouponValue;
+import com.tnq.ngocquang.datn.support.MyVolley;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -44,7 +56,8 @@ public class DetailCouponActivity extends AppCompatActivity {
     private Runnable mRunable;
     private ArrayList<ProductImage> mListImage;
     private int mCurrentItem;
-
+    private RequestQueue mRequestQueue;
+    private final   String URL_UpdateCouponClickCount = Constant.hostname + Constant.updateCouponClickCountAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +66,35 @@ public class DetailCouponActivity extends AppCompatActivity {
         anhxa();
         Intent intent = getIntent();
          coupon = intent.getParcelableExtra("coupon");
-        Log.d("AAA",coupon.getProduct().getContact());
         if (coupon != null) {
+
             initData(coupon);
+            updateCouponClickCount(coupon.getId());
         }
+    }
+
+    private void updateCouponClickCount(int couponId){
+        String url = URL_UpdateCouponClickCount.toString();
+        url += "?couponId=" + couponId;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("AAA up_clickcount:", error.toString() );
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> headers = new HashMap<>();
+                headers.put("Content-Type","application/json");
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(50000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(request);
     }
 
     @Override
@@ -96,8 +134,7 @@ public class DetailCouponActivity extends AppCompatActivity {
         if(coupon.getCreateBy() != null){
             mAddress.setText(coupon.getCreateBy().getAddress());
         }else{
-            mAddress.setText("no address");
-            mMap.setVisibility(View.INVISIBLE);
+            mAddress.setText(" không có địa chỉ ");
         }
 
     }
@@ -114,11 +151,18 @@ public class DetailCouponActivity extends AppCompatActivity {
         mMap = findViewById(R.id.map_detail_coupon);
         mContact = findViewById(R.id.contact_detail_coupon);
         mListImage = new ArrayList<>();
+        mRequestQueue = MyVolley.getInstance(getApplicationContext()).getRequestQueue();
     }
 
     public void shareCoupon(View view)
     {
         String content = coupon.getTitle() + "\n" + "khuyến mãi : " + ConvertCouponValue.convert(coupon.getType(),coupon.getValue(),coupon.getValuetype());
+        if(coupon.getProduct().getContact() != null){
+            content += "\n" + "truy cập địa chỉ : " + coupon.getProduct().getContact();
+        }
+        if(coupon.getCreateBy().getPhoneNumber() != null){
+            content += "\n" + "liên hệ : " + coupon.getCreateBy().getPhoneNumber();
+        }
         String mimeType = "text/plain";
         String title = "bạn muốn chia sẻ với :";
         ShareCompat.IntentBuilder.from(this)
@@ -175,8 +219,9 @@ public class DetailCouponActivity extends AppCompatActivity {
     }
 
     public void openWebsite(View view) {
-        if (coupon != null){
+        if (coupon.getProduct() != null){
             String url = coupon.getProduct().getContact().trim();
+            url.replace(" ","");
             Uri webpage = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW,webpage);
             if(intent.resolveActivity(getPackageManager()) != null){

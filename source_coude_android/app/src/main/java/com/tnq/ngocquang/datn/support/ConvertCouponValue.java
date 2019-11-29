@@ -1,21 +1,28 @@
 package com.tnq.ngocquang.datn.support;
 
+import android.util.Log;
+
 public class ConvertCouponValue {
     public static String convert(int type, double value, int valueType){
 
         String couponValue = "- ";
-        // sale off by percent
+        // free ship
         if (type == 1) {
-            couponValue += value + " %";
+            couponValue = " miễn phí vận chuyển";
         }
-        // sale off by money
+        // discount
         else if (type == 2) {
-            if (valueType == 0) {
-                couponValue += (int)(value * 1000) + " Vnd";
-            } else if (valueType == 1) {
+            if(valueType == 1){
+                couponValue += value + " % ";
+            }
+            else if (valueType == 2) {
+                couponValue += (int)(value) + " Vnd";
+            } else if (valueType == 3) {
                 couponValue += value + " Usd";
             }
         }
         return couponValue;
     }
+
+
 }

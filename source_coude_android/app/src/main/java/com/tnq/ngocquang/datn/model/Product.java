@@ -14,6 +14,16 @@ public class Product implements Parcelable {
     public Product() {
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", productImages=" + productImages.toString() +
+                ", contact='" + contact + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

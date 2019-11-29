@@ -10,6 +10,13 @@ public class ProductImage implements Parcelable {
     public ProductImage() {
     }
 
+    @Override
+    public String toString() {
+        return "ProductImage{" +
+                "image='" + image + '\'' +
+                '}';
+    }
+
     public String getImage() {
         return image;
     }

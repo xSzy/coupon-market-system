@@ -12,6 +12,16 @@ public class Account implements Parcelable {
     public Account() {
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userId='" + userId + '\'' +
+                '}';
+    }
+
     public Account(int id, String username, String password, String userId) {
         this.id = id;
         this.username = username;

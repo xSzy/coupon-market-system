@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/custom_background"
-    tools:context=".home.tab_info.DetailInfoUser">
+    tools:context=".home.tab_info.info_user.DetailInfoUser">
 
     <androidx.cardview.widget.CardView
         android:layout_width="200dp"
@@ -24,12 +24,20 @@
             android:adjustViewBounds="true" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_info_user_detail"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view2"
         android:layout_marginTop="@dimen/distance_8"
-        android:layout_below="@id/view2"/>
+        android:layout_marginLeft="@dimen/distance_8"
+        android:layout_marginRight="@dimen/distance_8">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_info_user_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distance_8"
+            android:layout_below="@id/view2"/>
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

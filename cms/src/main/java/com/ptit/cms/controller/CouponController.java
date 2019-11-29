@@ -178,10 +178,10 @@ public class CouponController {
 	public ResponseEntity<ResponseModel> getCouponByClickcount(@RequestParam int pageSize) {
 		ResponseModel response = new ResponseModel();
 		ErrorMessage errorMessage = new ErrorMessage();
-
 		List<Coupon> listCoupon = null;
 		try {
 			listCoupon = couponService.getCouponByClickcount(pageSize);
+			System.out.println("value type : " + listCoupon.get(0).getValueType());
 			response.setStatus(Constant.STATUS_SUCCESS);
 			response.setError(null);
 		} catch (Exception e) {
