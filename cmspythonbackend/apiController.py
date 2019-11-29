@@ -1,15 +1,14 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from json import dump
-from flask import jsonify
 from flask.json import JSONEncoder
 
-from predictService import predict, ImageSearchResult
+import predictService
 import trainingService
 
 
 class MyJSONEncoder(JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, ImageSearchResult):
+        if isinstance(obj, predictService.ImageSearchResult):
             return {
                 'image': obj.image,
                 'similarity': obj.similarity
@@ -24,7 +23,8 @@ app.json_encoder = MyJSONEncoder
 @app.route('/visualSearch', methods=['POST'])
 def visualSearch():
     file = request.files['file']
-    return jsonify(result=predict(file))
+    limit = request.form['limit']
+    return jsonify(result=predictService.predict(file, limit))
 
 
 @app.route('/updateData', methods=['POST'])

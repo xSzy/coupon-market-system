@@ -4,7 +4,8 @@ import com.ptit.cms.model.other.ImageResponse;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 
 public interface ImageDao {
-    List<BigInteger> getCouponByImage(List<ImageResponse> listImage, int limit);
+    Set<BigInteger> getCouponByImage(List<ImageResponse> listImage);
 }

@@ -48,7 +48,7 @@ public class Account
 		return password;
 	}
 
-	@JsonProperty
+//	@JsonProperty
 	public void setPassword(String password)
 	{
 		this.password = password;
