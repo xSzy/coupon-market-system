@@ -62,7 +62,6 @@ public class TrendCouponAdapter extends PagerAdapter {
         final Coupon coupon = mListCoupon.get(position);
         String urlImageCoupon = Constant.hostImage;
         urlImageCoupon += coupon.getProduct().getProductImages().get(0).getImage();
-        Log.d("AAA",urlImageCoupon);
         if(urlImageCoupon != null){
             Glide.with(mContext).load(urlImageCoupon).into(image);
         }else{

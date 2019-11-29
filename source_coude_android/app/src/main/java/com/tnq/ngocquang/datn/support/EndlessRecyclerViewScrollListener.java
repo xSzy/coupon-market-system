@@ -1,5 +1,7 @@
 package com.tnq.ngocquang.datn.support;
 
+import android.util.Log;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +19,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
     // True if we are still waiting for the last set of data to load.
     private boolean loading = true;
     // Sets the starting page index
-    private int startingPageIndex = 0;
+    private int startingPageIndex = 1;
 
     RecyclerView.LayoutManager mLayoutManager;
 
@@ -69,7 +71,9 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state
         if (totalItemCount < previousTotalItemCount) {
+
             this.currentPage = this.startingPageIndex;
+            Log.d("AAA reset current Page",currentPage + "");
             this.previousTotalItemCount = totalItemCount;
             if (totalItemCount == 0) {
                 this.loading = true;
@@ -89,6 +93,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
         // threshold should reflect how many total columns there are too
         if (!loading && (lastVisibleItemPosition + visibleThreshold) > totalItemCount) {
             currentPage++;
+            Log.d("AAA current page",currentPage + "");
             onLoadMore(currentPage, totalItemCount, view);
             loading = true;
         }
@@ -96,7 +101,9 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
 
     // Call this method whenever performing new searches
     public void resetState() {
+
         this.currentPage = this.startingPageIndex;
+        Log.d("AAA reset state",currentPage + "");
         this.previousTotalItemCount = 0;
         this.loading = true;
     }

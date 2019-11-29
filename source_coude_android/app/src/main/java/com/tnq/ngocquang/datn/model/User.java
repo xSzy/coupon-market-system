@@ -23,6 +23,23 @@ public class User implements Parcelable {
     }
 
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", account=" + account.toString() +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", name='" + name + '\'' +
+                ", dob=" + dob +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", citizenId='" + citizenId + '\'' +
+                ", gender=" + gender +
+                ", role=" + role +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

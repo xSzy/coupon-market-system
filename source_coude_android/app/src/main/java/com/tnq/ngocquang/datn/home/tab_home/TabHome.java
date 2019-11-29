@@ -86,7 +86,6 @@ public class TabHome extends Fragment {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-//                Log.d("AAA", response.toString());
                 try {
                     JSONArray listResponse = response.getJSONArray("data");
                     for (int i = 0 ; i < listResponse.length() ;i ++){

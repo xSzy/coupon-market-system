@@ -18,6 +18,19 @@ public class Category implements Parcelable {
     public Category() {
     }
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", subCategory=" + subCategory +
+                ", description='" + description + '\'' +
+                ", descriptionEnglish='" + descriptionEnglish + '\'' +
+                ", topCategory=" + topCategory +
+                '}';
+    }
+
     protected Category(Parcel in) {
         id = in.readInt();
         name = in.readString();

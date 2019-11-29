@@ -109,6 +109,7 @@ public class DetailCategory extends AppCompatActivity implements RecyclerViewCli
         EndlessRecyclerViewScrollListener endlessRecyclerViewScrollListener = new EndlessRecyclerViewScrollListener(mLayoutManagerCoupon) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.d("AAA page ",page + "");
                 fetchListCouponFromAPI(page, idCate);
             }
         };
@@ -119,7 +120,7 @@ public class DetailCategory extends AppCompatActivity implements RecyclerViewCli
         TAG_REQUEST_VOLLEY = idCate + "";
         mProgressBar.setVisibility(View.VISIBLE);
         // send request to server, receive list coupon by category and subcategory
-        String url = urlFindCouponsByCate + "?_page=" + page + "&_limit=5" + "&categoryId=" + idCate;
+        String url = urlFindCouponsByCate + "?_page=" + page + "&_limit=8" + "&categoryId=" + idCate;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -128,8 +129,10 @@ public class DetailCategory extends AppCompatActivity implements RecyclerViewCli
                         JSONArray jsonArray = response.getJSONArray("data");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                             Gson gson = new Gson();
                             Coupon coupon = gson.fromJson(jsonObject.toString(), Coupon.class);
+
                             mListCoupon.add(coupon);
 //                            Log.d("AAA", coupon.getValue() + "");
                         }
@@ -161,7 +164,7 @@ public class DetailCategory extends AppCompatActivity implements RecyclerViewCli
 
     //when item of category is clicked.
     @Override
-    public void recyclerViewListClicked(View v, int position) {
+    public void clickedItem(View v, int position) {
         if (mPrevView != null) {
             mPrevView.setBackground(getResources().getDrawable(R.drawable.edt_default));
         }

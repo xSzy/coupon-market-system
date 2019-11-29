@@ -9,9 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NoActionBarTheme">
-        <activity android:name=".home.tab_info.EditInfoUser"></activity>
-        <activity android:name=".home.tab_info.DetailInfoUser" />
-        <activity android:name=".home.tab_info.InfoActivity" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
+
+        <activity android:name=".home.tab_info.manage_coupon.AddCouponNew"></activity>
+        <activity android:name=".home.tab_info.manage_coupon.ManageCoupon" />
+        <activity android:name=".home.tab_info.info_user.EditInfoUser" />
+        <activity android:name=".home.tab_info.info_user.DetailInfoUser" />
+        <activity android:name=".home.tab_info.info_user.InfoActivity" />
         <activity android:name=".home.tab_home.DetailCategory" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".home.tab_info.TabInfo" />
@@ -26,7 +39,7 @@
         </activity>
         <activity android:name=".AddCouponActivity" />
         <activity android:name=".list_coupon.DetailCouponActivity" />
-        <activity android:name=".list_coupon.ListCoupon" />
+        <activity android:name=".list_coupon.ListCouponAll" />
         <activity android:name=".login_register_user.RegisterActivity" />
         <activity android:name=".login_register_user.LoginActivity" />
         <activity android:name=".MainActivity" />
@@ -53,5 +66,7 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>

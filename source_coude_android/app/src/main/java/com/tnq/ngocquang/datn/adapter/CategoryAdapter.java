@@ -3,6 +3,7 @@ package com.tnq.ngocquang.datn.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tnq.ngocquang.datn.R;
+import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.home.tab_home.DetailCategory;
 import com.tnq.ngocquang.datn.home.tab_home.TabHome;
 import com.tnq.ngocquang.datn.interface_.RecyclerViewClickListener;
@@ -70,13 +72,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
 
         public void bindTo(Category category) {
-            String urlIcon = category.getIcon();
+            String urlIcon = Constant.hostIconCategory;
+            urlIcon += category.getIcon();
             String title = category.getName();
 
-            // because, this is demo so .....
-            TypedArray image = view.getResources().obtainTypedArray(R.array.demo_icon_category);
-            Glide.with(mContext).load(image.getResourceId(0, 0)).into(mIcon);
-            image.recycle();
+            if (category.getIcon() != null) {
+                Glide.with(mContext).load(urlIcon).into(mIcon);
+            } else {
+                // because, this is demo so .....
+                TypedArray image = view.getResources().obtainTypedArray(R.array.demo_icon_category);
+                Glide.with(mContext).load(image.getResourceId(0, 0)).into(mIcon);
+                image.recycle();
+            }
             /////
             mTitle.setText(category.getName());
 
@@ -87,11 +94,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             if (mId == "TAB_HOME") {
                 Category category = mListCategory.get(getAdapterPosition());
                 Intent intent = new Intent(mContext, DetailCategory.class);
-                intent.putExtra("category",category);
+                intent.putExtra("category", category);
                 mContext.startActivity(intent);
             }
-            if(mRecyclerClickListener != null){
-                mRecyclerClickListener.recyclerViewListClicked(view, getAdapterPosition());
+            if (mRecyclerClickListener != null) {
+                mRecyclerClickListener.clickedItem(view, getAdapterPosition());
 
             }
         }

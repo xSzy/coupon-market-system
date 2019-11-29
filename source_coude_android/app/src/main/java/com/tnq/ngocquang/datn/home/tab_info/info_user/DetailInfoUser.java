@@ -1,4 +1,4 @@
-package com.tnq.ngocquang.datn.home.tab_info;
+package com.tnq.ngocquang.datn.home.tab_info.info_user;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,83 +23,104 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.tnq.ngocquang.datn.R;
-import com.tnq.ngocquang.datn.adapter.InfoUserAdapter;
-import com.tnq.ngocquang.datn.interface_.RecyclerViewClickListener;
+import com.tnq.ngocquang.datn.adapter.InfoUserDetailAdapter;
 import com.tnq.ngocquang.datn.login_register_user.LoginActivity;
 import com.tnq.ngocquang.datn.login_register_user.LoginFBCallBack;
-import com.tnq.ngocquang.datn.model.Account;
+import com.tnq.ngocquang.datn.model.InfoUser;
 import com.tnq.ngocquang.datn.model.User;
+import com.tnq.ngocquang.datn.support.ConvertGenderUser;
+import com.tnq.ngocquang.datn.support.ConvertRoleUser;
 import com.tnq.ngocquang.datn.support.MyVolley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InfoActivity extends AppCompatActivity implements RecyclerViewClickListener {
+public class DetailInfoUser extends AppCompatActivity {
 
-    private ArrayList<String> mListOption;
+    private ImageView mAvatar;
     private RecyclerView mRecyclerView;
-    private InfoUserAdapter mInfoUserAdapter;
-    private TextView mNameUser;
-    private ImageView mAvatarUser;
+    private ArrayList<InfoUser> mListInfoUser;
     private User mUser;
+    private InfoUserDetailAdapter mAdapter;
     private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info2);
+        setContentView(R.layout.activity_detail_info_user);
         anhxa();
         requestQueue = MyVolley.getInstance(getApplicationContext()).getRequestQueue();
         Intent intent = getIntent();
-        intent.setExtrasClassLoader(getClassLoader());
-        mUser  = intent.getParcelableExtra("user");
-        Log.d("AAA info",mUser.getGender() + "");
-        Log.d("AAA info",mUser.getAccount().getUsername() + "");
-        Log.d("AAA info",mUser.getDob()+ "");
-        initOption(mUser);
+        mUser = intent.getParcelableExtra("userDetail");
+        Log.d("AAA detail",mUser.getGender() + "");
+        Log.d("AAA detail",mUser.getAccount().getUsername() + "");
+        Log.d("AAA detail",mUser.getDob().toString() + "");
+        if (mUser != null) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            mAdapter = new InfoUserDetailAdapter(this, mListInfoUser);
+            mRecyclerView.setAdapter(mAdapter);
+            initInfoUser(mUser);
+        }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
         loginHandle(LoginActivity.urlLogin,mUser.getAccount().getUsername(),mUser.getAccount().getPassword(),(mUser.getAccount().getUserId() != null) ? mUser.getAccount().getUserId() : "",null, this );
-
     }
 
-    private void initOption(User user) {
-        mListOption.clear();
-        if (user != null) {
-            String name = user.getName();
-            String avatarUrl = user.getAvatarUrl();
-            if (user.getName() != null)
-                mNameUser.setText(name);
-            if (user.getAvatarUrl() != null)
-                Glide.with(this).load(Uri.parse(avatarUrl)).into(mAvatarUser);
-            mListOption.add("Thông tin người dùng");
-            mListOption.add("Quản lý coupon");
-            mListOption.add("Đăng xuất");
-            mInfoUserAdapter = new InfoUserAdapter(this, mListOption, this);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            mRecyclerView.setAdapter(mInfoUserAdapter);
-        } else {
-            Toast.makeText(this, "user null", Toast.LENGTH_SHORT).show();
+    private void initInfoUser(User user) {
+        mListInfoUser.clear();
+        if (user.getAvatarUrl() != null) {
+            Glide.with(this).load(Uri.parse(user.getAvatarUrl())).into(mAvatar);
         }
+        if (user.getName() != null) {
+            mListInfoUser.add(new InfoUser("Họ và tên ", user.getName()));
+        }
+        if (user.getDob() != null) {
+            String content = String.valueOf(DateFormat.format("dd/MM/yyyy", user.getDob()));
+            mListInfoUser.add(new InfoUser("Ngày sinh ", content));
+        }
+        if (user.getEmail() != null) {
+            mListInfoUser.add(new InfoUser("Email ", user.getEmail()));
+        }
+        if (user.getAddress() != null) {
+            mListInfoUser.add(new InfoUser("Địa chỉ ", user.getAddress()));
+        }
+        if (user.getPhoneNumber() != null) {
+            mListInfoUser.add(new InfoUser("Số điện thoại ", user.getPhoneNumber()));
+        }
+        if (user.getCitizenId() != null) {
+            mListInfoUser.add(new InfoUser("Số chứng minh thư ", user.getCitizenId()));
+        }
+        if (user.getGender() == 1 || user.getGender() == 2 || user.getGender() == 0) {
+            mListInfoUser.add(new InfoUser("Giới tính ", ConvertGenderUser.convert(user.getGender())));
+        }
+        if(user.getRole() == 1 || user.getRole() == 2){
+            mListInfoUser.add(new InfoUser("Chức vụ ", ConvertRoleUser.convert(user.getRole())));
+        }
+        mAdapter.notifyDataSetChanged();
+
     }
+
 
     private void anhxa() {
-        mAvatarUser = findViewById(R.id.avatar_info);
-        mNameUser = findViewById(R.id.name_user_info);
-        mRecyclerView = findViewById(R.id.option_info);
-        mListOption = new ArrayList<>();
-
+        mAvatar = findViewById(R.id.avatar_info_detail);
+        mRecyclerView = findViewById(R.id.list_info_user_detail);
+        mListInfoUser = new ArrayList<>();
     }
 
-    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack, final InfoActivity infoActivity){
+    public void editInfoUser(View view) {
+        Intent intent = new Intent(this, EditInfoUser.class);
+        intent.putExtra("editinfouser",mUser);
+        startActivity(intent);
+    }
+
+    private void loginHandle(final String url, final String userName, final String passWord, final String userId, final LoginFBCallBack loginFBCallBack, final DetailInfoUser detailInfoUser){
         Map<String,String> params = new HashMap<>();
         params.put("username",userName);
         params.put("password",passWord);
@@ -114,7 +135,7 @@ public class InfoActivity extends AppCompatActivity implements RecyclerViewClick
                     String data = response.getString("data");
                     Log.d("AAA",data);
                     mUser = new Gson().fromJson(data,User.class);
-                    infoActivity.initOption(mUser);
+                    detailInfoUser.initInfoUser(mUser);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -125,7 +146,7 @@ public class InfoActivity extends AppCompatActivity implements RecyclerViewClick
             public void onErrorResponse(VolleyError error) {
                 if(userId.isEmpty() && loginFBCallBack == null){
                     Log.d("AAA", "login : "+ error.toString());
-                    Toast.makeText(InfoActivity.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailInfoUser.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     loginFBCallBack.registerNewAccount(userId);
@@ -142,36 +163,6 @@ public class InfoActivity extends AppCompatActivity implements RecyclerViewClick
         request.setRetryPolicy( new DefaultRetryPolicy(50000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue.add(request);
-
-    }
-
-    @Override
-    public void recyclerViewListClicked(View v, int position) {
-        switch (position) {
-            case 0:
-                displayInfoUser(mUser);
-                break;
-            case 1:
-                manageCoupon();
-                break;
-            case 2:
-                logOut();
-                break;
-            default:
-
-        }
-    }
-
-    private void logOut() {
-    }
-
-    private void displayInfoUser(User user) {
-        Intent intent = new Intent(this,DetailInfoUser.class);
-        intent.putExtra("userDetail",user);
-        startActivity(intent);
-    }
-
-    private void manageCoupon(){
 
     }
 }

@@ -131,6 +131,15 @@
                     android:onClick="mapOfCoupon"
                     android:layout_marginStart="@dimen/distance_8"/>
 
+               <TextView
+                   android:id="@+id/dashed_line"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:textAlignment="center"
+                   android:maxLines="1"
+                   android:text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+                   android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                   android:layout_below="@id/map_detail_coupon"/>
                 <TextView
                     android:id="@+id/description_detail_coupon"
                     android:text="description"
@@ -139,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="italic"
-                    android:layout_below="@id/address_detail_coupon"
+                    android:layout_below="@id/dashed_line"
                     android:layout_margin="@dimen/distance_8" />
             </RelativeLayout>
         </ScrollView>
@@ -151,7 +160,8 @@
         app:backgroundTint="#66ffe0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/distance_8"
+        android:layout_marginBottom="@dimen/distance_8"
+        android:layout_marginRight="@dimen/distance_16"
         android:onClick="callToAuthor"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"/>

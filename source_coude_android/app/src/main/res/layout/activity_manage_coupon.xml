@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
+    tools:context=".home.tab_info.manage_coupon.ManageCoupon">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/cardView_avatar_managecoupon"
+        app:cardCornerRadius="60dp"
+        android:layout_margin="@dimen/distance_16"
+        android:shape="ring">
+
+        <ImageView
+            android:id="@+id/avatar_managecoupon"
+            android:src="@drawable/ic_account_circle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_circle_default"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_infouser_managecoupon"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="@dimen/distance_16"
+        android:layout_marginTop="@dimen/distance_16"
+        android:layout_marginRight="@dimen/distance_8"
+        android:layout_toRightOf="@id/cardView_avatar_managecoupon">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iconuser_managecoupon"
+                android:src="@drawable/ic_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginLeft="@dimen/distance_8"/>
+            <TextView
+                android:id="@+id/nameuser_managecoupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tran ngoc quang"
+                android:textColor="@android:color/black"
+                android:layout_toRightOf="@id/iconuser_managecoupon"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginLeft="@dimen/distance_8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <ImageView
+                android:id="@+id/iconrole_managecoupon"
+                android:src="@drawable/ic_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginLeft="@dimen/distance_8"
+                android:layout_below="@id/iconuser_managecoupon"/>
+
+            <TextView
+                android:id="@+id/roleuser_managecoupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user"
+                android:textColor="@android:color/black"
+                android:layout_below="@id/iconuser_managecoupon"
+                android:layout_toRightOf="@id/iconrole_managecoupon"
+                android:layout_marginTop="@dimen/distance_16"
+                android:layout_marginLeft="@dimen/distance_8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_coupon_by_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cardView_avatar_managecoupon"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        android:layout_marginBottom="@dimen/distance_8"
+        android:backgroundTint="#71F0F0"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="addCouponNew"/>
+
+</RelativeLayout>

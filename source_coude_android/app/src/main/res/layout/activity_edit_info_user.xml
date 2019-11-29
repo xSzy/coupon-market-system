@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/parent_layout_edit_info_user"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.tab_info.EditInfoUser">
+    tools:context=".home.tab_info.info_user.EditInfoUser">
 
     <androidx.cardview.widget.CardView
         android:layout_width="200dp"
@@ -35,6 +40,7 @@
                 android:id="@+id/name_info_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="@dimen/distance_8"
@@ -95,6 +101,7 @@
                 android:id="@+id/address_info_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="@dimen/distance_8"
@@ -135,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
-                android:inputType="number"
+                android:inputType="phone"
                 android:layout_marginTop="@dimen/distance_8"
                 android:layout_below="@id/phone_info_edit"/>
             <TextView
@@ -155,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
+                android:inputType="textEmailAddress"
                 android:layout_marginTop="@dimen/distance_8"
                 android:layout_below="@id/citiId_info_edit"/>
             <TextView
@@ -175,6 +183,9 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="@dimen/distance_8"
+                android:editable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:layout_below="@id/gender_info_edit"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -182,7 +193,6 @@
                 android:textColor="@android:color/black"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:text="chức vụ"
-                android:inputType="number"
                 android:layout_alignRight="@id/dob_info_edit"
                 android:layout_marginTop="@dimen/distance_16"
                 android:layout_marginRight="@dimen/distance_8"

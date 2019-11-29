@@ -6,6 +6,7 @@
 
     <ImageView
         android:id="@+id/iconCategory"
+        android:src="@drawable/coupon"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:adjustViewBounds="true"
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="title"
         android:textColor="@android:color/black"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:layout_below="@id/iconCategory"
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/distance_8"/>

@@ -59,7 +59,7 @@ public class InfoUserAdapter extends RecyclerView.Adapter<InfoUserAdapter.ViewHo
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
-            mClickListener.recyclerViewListClicked(view,position);
+            mClickListener.clickedItem(view,position);
         }
     }
 }

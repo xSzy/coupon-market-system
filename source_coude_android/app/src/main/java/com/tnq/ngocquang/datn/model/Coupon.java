@@ -4,19 +4,23 @@ import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import java.util.Calendar;
 import java.util.Date;
 
 public class Coupon implements Parcelable  {
+    private int id;
     private String title;
     private String description;
     private Product product;
     private int type;
     private double value;
     private Date expireDate;
-    private int valuetype;
+    private int valueType;
     private int clickCount;
-    private Date createDate;
-    private User createBy;
+    private Date createdDate;
+    private User createdBy;
     private Category category;
 
     //private String[] images;
@@ -25,28 +29,36 @@ public class Coupon implements Parcelable  {
     public Coupon() {
     }
 
-    public Coupon(String title, String description, Product product, int type, double value, Date expireDate, int valuetype, int clickCount, Date createDate, User createBy, Category category) {
+    public Coupon(int id,String title, String description, Product product, int type, double value, Date expireDate, int valueType, int clickCount, Date createDate, User createBy, Category category) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.product = product;
         this.type = type;
         this.value = value;
         this.expireDate = expireDate;
-        this.valuetype = valuetype;
+        this.valueType = valueType;
         this.clickCount = clickCount;
-        this.createDate = createDate;
-        this.createBy = createBy;
+        this.createdDate = createDate;
+        this.createdBy = createBy;
         this.category = category;
     }
 
+
     protected Coupon(Parcel in) {
+        id = in.readInt();
         title = in.readString();
         description = in.readString();
         product = in.readParcelable(Product.class.getClassLoader());
         type = in.readInt();
         value = in.readDouble();
-        valuetype = in.readInt();
+        //
+        expireDate = new Date(in.readLong());
+        valueType = in.readInt();
         clickCount = in.readInt();
+        //
+        createdDate = new Date(in.readLong());
+        createdBy = in.readParcelable(User.class.getClassLoader());
         category = in.readParcelable(Category.class.getClassLoader());
     }
 
@@ -61,6 +73,32 @@ public class Coupon implements Parcelable  {
             return new Coupon[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", product=" + product.toString() +
+                ", type=" + type +
+                ", value=" + value +
+                ", expireDate=" + expireDate +
+                ", valueType=" + valueType +
+                ", clickCount=" + clickCount +
+                ", createdDate=" + createdDate +
+                ", createdBy=" + createdBy.toString() +
+                ", category=" + category.toString() +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -111,11 +149,11 @@ public class Coupon implements Parcelable  {
     }
 
     public int getValuetype() {
-        return valuetype;
+        return valueType;
     }
 
     public void setValuetype(int valuetype) {
-        this.valuetype = valuetype;
+        this.valueType = valuetype;
     }
 
     public int getClickCount() {
@@ -127,19 +165,19 @@ public class Coupon implements Parcelable  {
     }
 
     public Date getCreateDate() {
-        return createDate;
+        return createdDate;
     }
 
     public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+        this.createdDate = createDate;
     }
 
     public User getCreateBy() {
-        return createBy;
+        return createdBy;
     }
 
     public void setCreateBy(User createBy) {
-        this.createBy = createBy;
+        this.createdBy = createBy;
     }
 
     public Category getCategory() {
@@ -150,6 +188,7 @@ public class Coupon implements Parcelable  {
         this.category = category;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -157,13 +196,27 @@ public class Coupon implements Parcelable  {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeParcelable(product, i);
         parcel.writeInt(type);
         parcel.writeDouble(value);
-        parcel.writeInt(valuetype);
+        //
+        if(expireDate != null){
+            parcel.writeLong(expireDate.getTime());
+        }else{
+            parcel.writeLong(Calendar.getInstance().getTimeInMillis());
+        }
+        parcel.writeInt(valueType);
         parcel.writeInt(clickCount);
+        //
+        if(createdDate != null){
+            parcel.writeLong(createdDate.getTime());
+        }else{
+            parcel.writeLong(Calendar.getInstance().getTimeInMillis());
+        }
+        parcel.writeParcelable(createdBy, i);
         parcel.writeParcelable(category, i);
     }
 }

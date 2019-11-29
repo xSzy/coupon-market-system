@@ -37,7 +37,7 @@ import java.util.Map;
 
 import com.tnq.ngocquang.datn.constant.Constant;
 
-public class ListCoupon extends AppCompatActivity {
+public class ListCouponAll extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private ArrayList<Coupon> mListCoupon;
@@ -118,26 +118,7 @@ public class ListCoupon extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_setting, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.add_coupon:
-                // add coupon
-                Intent intent = new Intent(ListCoupon.this, LoginActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
 
-        }
 
-    }
 }

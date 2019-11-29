@@ -20,22 +20,26 @@ public class HomeActivity extends AppCompatActivity {
 
     TabLayout mTabLayout;
     ViewPager mViewPager;
-
+    int mPositionPreviousTab;
     @Override
     protected void onRestart() {
         super.onRestart();
-        mViewPager.setCurrentItem(0);
+        if(mPositionPreviousTab == 1){
+            mViewPager.setCurrentItem(0,true);
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         anhxa();
         mTabLayout.addTab(mTabLayout.newTab().setText("trang chủ").setIcon(R.drawable.ic_home),true);
         mTabLayout.addTab(mTabLayout.newTab().setText("tôi").setIcon(R.drawable.ic_account));
         mTabLayout.addTab(mTabLayout.newTab().setText("tìm kiếm").setIcon(R.drawable.ic_search));
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(),mTabLayout.getTabCount());
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
@@ -43,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
+                mPositionPreviousTab = tab.getPosition();
                 //  if tab info is displayed.
                 if(tab.getPosition() == 1){
                     displayAlert();
@@ -61,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+
     private void displayAlert(){
         new AlertDialog.Builder(this)
                 .setTitle("")
@@ -72,7 +78,12 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 })
-                .setNegativeButton("Hủy", null)
+                .setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mViewPager.setCurrentItem(0,true);
+                    }
+                })
                 .show();
     }
 

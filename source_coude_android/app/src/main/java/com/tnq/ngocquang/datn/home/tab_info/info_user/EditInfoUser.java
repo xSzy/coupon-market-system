@@ -1,16 +1,18 @@
-package com.tnq.ngocquang.datn.home.tab_info;
+package com.tnq.ngocquang.datn.home.tab_info.info_user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,17 +23,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.model.User;
+import com.tnq.ngocquang.datn.support.ConvertGenderUser;
+import com.tnq.ngocquang.datn.support.ConvertRoleUser;
 import com.tnq.ngocquang.datn.support.MyVolley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -54,21 +55,24 @@ public class EditInfoUser extends AppCompatActivity {
     private Calendar mCalendar;
     private RequestQueue mRequestQueue;
     private final String UPDATE_USER_URL = Constant.hostname + Constant.updateUserAPI;
+    private RelativeLayout mParentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_info_user);
         anhxa();
+        setOnTouchParentLayout();
         mRequestQueue = MyVolley.getInstance(getApplicationContext()).getRequestQueue();
         mUser = getIntent().getParcelableExtra("editinfouser");
         mCalendar = Calendar.getInstance();
-        mCalendar.set(mUser.getDob().getYear() + 1900,mUser.getDob().getMonth(),mUser.getDob().getDate());
+        mCalendar.set(mUser.getDob().getYear() + 1900, mUser.getDob().getMonth(), mUser.getDob().getDate());
         if (mUser != null) {
             initData(mUser);
             mDob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
+                    setHideKeyboard();
                     if (b == true) {
                         new DatePickerDialog(view.getContext(), retrieveDob(), mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
                     }
@@ -77,9 +81,29 @@ public class EditInfoUser extends AppCompatActivity {
             mDob.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    setHideKeyboard();
                     new DatePickerDialog(view.getContext(), retrieveDob(), mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 }
             });
+        }
+    }
+
+
+
+    private void setOnTouchParentLayout(){
+        mParentLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                setHideKeyboard();
+                return true;
+            }
+        });
+    }
+
+    private void setHideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        if(getCurrentFocus() != null){
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         }
     }
 
@@ -103,8 +127,8 @@ public class EditInfoUser extends AppCompatActivity {
         if (user.getName() != null) {
             mName.setText(user.getName() + "");
         }
-        if(user.getDob() != null){
-            mDob.setText(DateFormat.format("dd-MM-yyyy",user.getDob()));
+        if (user.getDob() != null) {
+            mDob.setText(DateFormat.format("dd-MM-yyyy", user.getDob()));
         }
         if (user.getAddress() != null) {
             mAddress.setText(user.getAddress().toString() + "");
@@ -121,8 +145,7 @@ public class EditInfoUser extends AppCompatActivity {
         if (user.getGender() == 1 || user.getGender() == 2) {
             mGender.setText((user.getGender() == 1) ? "Nam" : "Nữ");
         }
-        mRole.setText(user.getRole() + "");
-
+        mRole.setText(ConvertRoleUser.convert(user.getRole()));
     }
 
     private void anhxa() {
@@ -135,6 +158,7 @@ public class EditInfoUser extends AppCompatActivity {
         mCitizenId = findViewById(R.id.citiId_info_edit);
         mGender = findViewById(R.id.gender_info_edit);
         mRole = findViewById(R.id.role_info_edit);
+        mParentLayout = findViewById(R.id.parent_layout_edit_info_user);
     }
 
     public void doneEditInfoUser(View view) {
@@ -148,13 +172,11 @@ public class EditInfoUser extends AppCompatActivity {
                 mAddress.getText().toString().equals("") ||
                 mPhone.getText().toString().equals("") ||
                 mCitizenId.getText().toString().equals("") ||
-                mGender.getText().toString().equals("") ||
-                mRole.getText().toString().equals("")) {
+                mGender.getText().toString().equals("")) {
             Toast.makeText(this, "bạn chưa nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-        }else if(!matcher.matches()){
+        } else if (!matcher.matches()) {
             Toast.makeText(this, "sai định dạng email", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             user.setId(mUser.getId());
             user.setAvatarUrl(mUser.getAvatarUrl());
             user.setAccount(mUser.getAccount());
@@ -165,38 +187,37 @@ public class EditInfoUser extends AppCompatActivity {
             user.setAddress(mAddress.getText().toString());
             user.setPhoneNumber(mPhone.getText().toString());
             user.setCitizenId(mCitizenId.getText().toString());
-            Log.d("AAA gender : ", mGender.getText().toString().toLowerCase());
-            user.setGender((mGender.getText().toString().toLowerCase().equals("nam".trim()) ) ? 1 : 2);
             try {
-                user.setRole(Integer.parseInt(mRole.getText().toString()));
-
-            } catch (Exception ex) {
-                user.setRole(1);
+                user.setGender(ConvertGenderUser.reConvert(mGender.getText().toString()));
+            }catch (Exception ex){
+                user.setGender(0);
             }
 
-            HashMap<String,String> accountParams = new HashMap<>();
-            accountParams.put("id",String.valueOf(user.getAccount().getId()));
-            accountParams.put("username",user.getAccount().getUsername());
-            accountParams.put("password",user.getAccount().getPassword());
-            accountParams.put("userId",user.getAccount().getUserId());
+            user.setRole(mUser.getRole());
+
+            HashMap<String, String> accountParams = new HashMap<>();
+            accountParams.put("id", String.valueOf(user.getAccount().getId()));
+            accountParams.put("username", user.getAccount().getUsername());
+            accountParams.put("password", user.getAccount().getPassword());
+            accountParams.put("userId", user.getAccount().getUserId());
             JSONObject accountJson = new JSONObject(accountParams);
             JSONObject userJson = new JSONObject();
             try {
-                userJson.put("id",String.valueOf(user.getId()));
-                userJson.put("account",accountJson);
-                userJson.put("avatarUrl",user.getAvatarUrl());
-                userJson.put("name",user.getName());
-                userJson.put("dob",DateFormat.format("yyyy-MM-dd",user.getDob()));
-                userJson.put("email",user.getEmail());
-                userJson.put("address",user.getAddress());
-                userJson.put("phoneNumber",user.getPhoneNumber());
-                userJson.put("citizenId",user.getCitizenId());
-                userJson.put("gender",String.valueOf(user.getGender()));
-                userJson.put("role",String.valueOf(user.getRole()));
+                userJson.put("id", String.valueOf(user.getId()));
+                userJson.put("account", accountJson);
+                userJson.put("avatarUrl", user.getAvatarUrl());
+                userJson.put("name", user.getName());
+                userJson.put("dob", DateFormat.format("yyyy-MM-dd", user.getDob()));
+                userJson.put("email", user.getEmail());
+                userJson.put("address", user.getAddress());
+                userJson.put("phoneNumber", user.getPhoneNumber());
+                userJson.put("citizenId", user.getCitizenId());
+                userJson.put("gender", String.valueOf(user.getGender()));
+                userJson.put("role", String.valueOf(user.getRole()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.d("AAA",userJson.toString());
+            Log.d("AAA", userJson.toString());
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, UPDATE_USER_URL, userJson, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -207,7 +228,7 @@ public class EditInfoUser extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    if(status.equals("success")){
+                    if (status.equals("success")) {
                         Toast.makeText(EditInfoUser.this, "cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
                         finish();
                     }

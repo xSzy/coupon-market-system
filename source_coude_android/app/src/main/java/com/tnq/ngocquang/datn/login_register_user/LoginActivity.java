@@ -24,9 +24,8 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
-import com.tnq.ngocquang.datn.home.tab_info.InfoActivity;
+import com.tnq.ngocquang.datn.home.tab_info.info_user.InfoActivity;
 import com.tnq.ngocquang.datn.R;
-import com.tnq.ngocquang.datn.interface_.ISendIntent;
 import com.tnq.ngocquang.datn.model.Account;
 import com.tnq.ngocquang.datn.model.User;
 

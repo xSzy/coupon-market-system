@@ -61,7 +61,7 @@ public class Coupon
 	@Column(name = "createdDate")
 	private Date createdDate;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "createdByUserId")
 	private User createdBy;
 	
