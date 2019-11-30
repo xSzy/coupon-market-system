@@ -173,7 +173,7 @@ public class TabSearch extends Fragment {
                 mChildrenLayout.setVisibility(View.GONE);
                 mParentLayout.setVisibility(View.VISIBLE);
                 Bitmap bitmap = ((BitmapDrawable) mImageSearch.getDrawable()).getBitmap();
-                ImageUpload imageUpload = new ImageUpload(convertBitmapToFile(bitmap,Uri.parse(cameraFilePath).getLastPathSegment()), "20");
+                ImageUpload imageUpload = new ImageUpload(convertBitmapToFile(bitmap,Uri.parse(cameraFilePath).getLastPathSegment()), "100");
 //
                 // send request
                 MultipartRequest request = new MultipartRequest(Request.Method.POST, URL_SEARCH_COUPON_BY_IMAGE, new Response.ErrorListener() {
@@ -302,7 +302,7 @@ public class TabSearch extends Fragment {
         }
     }
 
-    private void fetchData(int page, String keySearch) {
+    private void fetchDataByText(int page, String keySearch) {
         mLoadingProgress.setVisibility(View.VISIBLE);
         String url = URL_SEARCH_COUPON_BY_TEXT.toString();
         url += "?pageNum=" + page + "&pageSize=20" + "&query=" + keySearch;
@@ -342,7 +342,7 @@ public class TabSearch extends Fragment {
     }
 
     private void loadDataSearchByText(int page) {
-        fetchData(page, mKeySearch);
+        fetchDataByText(page, mKeySearch);
     }
 
 
