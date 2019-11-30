@@ -160,7 +160,7 @@ public class DetailCouponActivity extends AppCompatActivity {
         if(coupon.getProduct().getContact() != null){
             content += "\n" + "truy cập địa chỉ : " + coupon.getProduct().getContact();
         }
-        if(coupon.getCreateBy().getPhoneNumber() != null){
+        if(coupon.getCreateBy()!= null){
             content += "\n" + "liên hệ : " + coupon.getCreateBy().getPhoneNumber();
         }
         String mimeType = "text/plain";
@@ -201,7 +201,7 @@ public class DetailCouponActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(this, "không thực hiện được hành động", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, Constant.errorMessage + " đường dẫn không tồn tại", Toast.LENGTH_SHORT).show();
             }
         }else{
             String loc = "PTIT";
@@ -211,7 +211,7 @@ public class DetailCouponActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(this, "không thực hiện được hành động", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, Constant.errorMessage + " đường dẫn không tồn tại", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -222,13 +222,14 @@ public class DetailCouponActivity extends AppCompatActivity {
         if (coupon.getProduct() != null){
             String url = coupon.getProduct().getContact().trim();
             url.replace(" ","");
+            Log.d("AAA url :",url);
             Uri webpage = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW,webpage);
             if(intent.resolveActivity(getPackageManager()) != null){
                 startActivity(intent);
             }
             else{
-                Toast.makeText(this, "không thực hiện được hành động", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, Constant.errorMessage + " đường dẫn không tồn tại", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -16,9 +16,11 @@ public class ConvertCouponValue {
                 couponValue += value + " % ";
             }
             else if (valueType == 2) {
-                couponValue += (int)(value) + " Vnd";
+                couponValue += (int)(value * 1000) + " Vnd";
             } else if (valueType == 3) {
                 couponValue += value + " Usd";
+            } else if(valueType == 4){
+                couponValue = "khuyến mãi khác";
             }
         }
         return couponValue;

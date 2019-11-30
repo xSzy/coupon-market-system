@@ -500,7 +500,7 @@ public class AddCouponNew extends AppCompatActivity implements RecyclerViewClick
         try {
             file.createNewFile();
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, bos);
             byte[] bitmapData = bos.toByteArray();
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(bitmapData);
