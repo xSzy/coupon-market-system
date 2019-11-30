@@ -1,9 +1,6 @@
 package com.ptit.cms.service.impl;
 
-import com.ptit.cms.dao.CategoryDao;
-import com.ptit.cms.dao.CouponDao;
-import com.ptit.cms.dao.FavouriteDao;
-import com.ptit.cms.dao.NotificationDao;
+import com.ptit.cms.dao.*;
 import com.ptit.cms.model.entity.Category;
 import com.ptit.cms.model.entity.Coupon;
 import com.ptit.cms.model.entity.Notification;
@@ -44,6 +41,9 @@ public class CouponServiceImpl implements CouponService {
 
 	@Autowired
 	private MiscService miscService;
+
+	@Autowired
+	private UserDao userDao;
 
 	@Override
 	public Coupon createCoupon(Coupon coupon) throws Exception {
@@ -105,7 +105,7 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public Iterable<Coupon> getCouponByCategory(int pageNum, int pageSize, int categoryId) throws Exception {
+	public List<Coupon> getCouponByCategory(int pageNum, int pageSize, int categoryId) throws Exception {
 		Category category = categoryDao.getOne(categoryId);
 		if (category == null)
 			throw new Exception("category not found");
@@ -196,6 +196,20 @@ public class CouponServiceImpl implements CouponService {
 		for(BigInteger id : listCouponIds)
 			listCoupon.add(couponDao.getOne(id.intValue()));
 		return listCoupon;
+	}
+
+	@Override
+	public List<Coupon> getCouponByCreator(int pageNum, int pageSize, User user) throws Exception {
+		user = userDao.getOne(user.getId());
+		if (user == null)
+			throw new Exception("user not found");
+		List<Coupon> listCoupon = couponDao.getCouponByCreator(user, new PageRequest(pageNum - 1, pageSize));
+		return listCoupon;
+	}
+
+	@Override
+	public List<Coupon> getCouponByDiscount(int pageNum, int pageSize) {
+		return couponDao.getCouponByDiscount(new PageRequest(pageNum - 1, pageSize));
 	}
 
 	private List<Category> getAllSubCategory(Category category) {

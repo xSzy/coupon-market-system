@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="150c5dc4-cc67-403e-a785-1e6719e6a4bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/dao/ImageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/dao/ImageDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/dao/impl/ImageDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/dao/impl/ImageDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/model/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/model/entity/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/service/impl/CouponServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/service/impl/CouponServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cms/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../cms/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cmspythonbackend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cmspythonbackend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apiController.py" beforeDir="false" afterPath="$PROJECT_DIR$/apiController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/predictService.py" beforeDir="false" afterPath="$PROJECT_DIR$/predictService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trainingService.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainingService.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -139,6 +130,7 @@
       <workItem from="1574735107193" duration="1595000" />
       <workItem from="1574750446700" duration="6163000" />
       <workItem from="1575032331486" duration="801000" />
+      <workItem from="1575080765416" duration="2556000" />
     </task>
     <servers />
   </component>
