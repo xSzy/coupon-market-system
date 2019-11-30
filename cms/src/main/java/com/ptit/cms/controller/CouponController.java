@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.ptit.cms.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -113,8 +114,7 @@ public class CouponController {
 
 		List<Coupon> listCoupon = null;
 		try {
-			listCoupon = new ArrayList<Coupon>();
-			couponService.getCouponByCategory(_page, _limit, categoryId).forEach(listCoupon::add);
+			listCoupon = couponService.getCouponByCategory(_page, _limit, categoryId);
 			response.setStatus(Constant.STATUS_SUCCESS);
 			response.setError(null);
 		} catch (Exception e) {
@@ -262,5 +262,52 @@ public class CouponController {
 		}
 		response.setData(data);
 		return new ResponseEntity<ResponseModel>(response, data == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/coupon/getByUser", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> getCouponByCreator(@RequestParam User user,
+															 @RequestParam(value = "_page", required = true) int _page,
+															 @RequestParam(value = "_limit", required = true) int _limit) {
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+
+		List<Coupon> listCoupon = null;
+		try {
+			listCoupon = couponService.getCouponByCreator(_page, _limit, user);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e) {
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(listCoupon);
+		return new ResponseEntity<ResponseModel>(response,
+				listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/coupon/getByDiscount", method = RequestMethod.GET)
+	public ResponseEntity<ResponseModel> getCouponByDiscount(@RequestParam(value = "_page", required = true) int _page,
+															@RequestParam(value = "_limit", required = true) int _limit) {
+		ResponseModel response = new ResponseModel();
+		ErrorMessage errorMessage = new ErrorMessage();
+
+		List<Coupon> listCoupon = null;
+		try {
+			listCoupon = couponService.getCouponByDiscount(_page, _limit);
+			response.setStatus(Constant.STATUS_SUCCESS);
+			response.setError(null);
+		} catch (Exception e) {
+			response.setStatus(Constant.STATUS_ERROR);
+			errorMessage.setErrorCode(-1);
+			errorMessage.setMessage(e.getMessage());
+			response.setError(errorMessage);
+			e.printStackTrace();
+		}
+		response.setData(listCoupon);
+		return new ResponseEntity<ResponseModel>(response,
+				listCoupon == null ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK);
 	}
 }
