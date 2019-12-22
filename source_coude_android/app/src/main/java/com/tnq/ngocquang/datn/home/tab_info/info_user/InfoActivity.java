@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.home.tab_info.manage_coupon.ManageCoupon;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.adapter.InfoUserAdapter;
@@ -118,7 +119,7 @@ public class InfoActivity extends AppCompatActivity implements RecyclerViewClick
             @Override
             public void onErrorResponse(VolleyError error) {
                 if(userId.isEmpty() && loginFBCallBack == null){
-                    Toast.makeText(InfoActivity.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InfoActivity.this, Constant.errorMessage, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     loginFBCallBack.registerNewAccount(userId);
