@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.tnq.ngocquang.datn.R;
 import com.tnq.ngocquang.datn.adapter.InfoUserDetailAdapter;
+import com.tnq.ngocquang.datn.constant.Constant;
 import com.tnq.ngocquang.datn.login_register_user.LoginActivity;
 import com.tnq.ngocquang.datn.login_register_user.LoginFBCallBack;
 import com.tnq.ngocquang.datn.model.InfoUser;
@@ -146,7 +147,7 @@ public class DetailInfoUser extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 if(userId.isEmpty() && loginFBCallBack == null){
                     Log.d("AAA", "login : "+ error.toString());
-                    Toast.makeText(DetailInfoUser.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailInfoUser.this, Constant.errorMessage, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     loginFBCallBack.registerNewAccount(userId);

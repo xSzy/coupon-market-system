@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
-    public static void registerHandle(String userName, String passWord, String userId) {
+    public void registerHandle(String userName, String passWord, String userId) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username",userName);
@@ -111,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     String status = response.getString("status");
                     if(status.equals("success")){
-                        Log.d("AAA"," dang nhap thanh cong");
+                        Toast.makeText(getApplicationContext(), "đăng ký thành công ", Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (JSONException e) {

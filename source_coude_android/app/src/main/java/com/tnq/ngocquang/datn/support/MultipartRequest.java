@@ -85,6 +85,4 @@ public class MultipartRequest extends Request<NetworkResponse> {
     protected void deliverResponse(NetworkResponse response) {
         mListener.onResponse(response);
     }
-
-
 }

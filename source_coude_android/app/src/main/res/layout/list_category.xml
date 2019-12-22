@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="130dp"
-    android:layout_height="130dp" android:layout_margin="@dimen/distance_8"
-    android:background="@drawable/edt_default">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/distance_16"
+    android:layout_height="130dp"
+    android:layout_margin="@dimen/distance_8">
 
-    <ImageView
-        android:id="@+id/iconCategory"
-        android:src="@drawable/coupon"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:layout_centerInParent="true"/>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@drawable/edt_default">
+       <ImageView
+           android:id="@+id/iconCategory"
+           android:src="@drawable/coupon"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginBottom="30dp"
+           android:adjustViewBounds="true"
+           android:scaleType="fitCenter" />
 
-    <TextView
-        android:id="@+id/titleCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="title"
-        android:textColor="@android:color/black"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:layout_below="@id/iconCategory"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/distance_8"/>
+       <TextView
+           android:id="@+id/titleCategory"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="title"
+           android:textColor="@android:color/black"
+           android:textAppearance="@style/TextAppearance.AppCompat.Small"
+           android:layout_alignParentBottom="true"
+           android:layout_centerHorizontal="true"
+           android:layout_marginBottom="@dimen/distance_8"/>
 
+   </RelativeLayout>
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>
