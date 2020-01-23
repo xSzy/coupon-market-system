@@ -20,6 +20,10 @@ graph = tf.get_default_graph()
 sess = tf.Session()
 set_session(sess)
 
+learning_rates = [0.01, 0.001, 0.0001]
+dropout_values = [0.1, 0.25, 0.4]
+epoch_values = [10, 20, 50]
+
 imagelist = []
 is_generating = False
 is_training = False
@@ -81,7 +85,7 @@ def predict_job(modelpath, imageiterator):
         predicts = model.predict_generator(imageiterator, verbose=1, steps=len(imageiterator.filepaths))
 
     # save predicts to file
-    print("[INFO] Pre-predicting finished, attemping to save to file.")
+    print("[INFO] Pre-predicting finished, attempting to save to file.")
     predicts = np.reshape(predicts, (predicts.shape[0], 100352))
     savefilename = datetime.now().strftime('%Y%m%d%H%M%S') + '_data.npy'
     np.save(os.getcwd() + savedatapath + '\\' + savefilename, predicts)
@@ -121,25 +125,41 @@ def train_job():
     val_it = datagen.flow_from_directory(imagedata_directory, target_size=(224, 224),
                                          class_mode='categorical', subset="validation")
     model = keras.applications.resnet.ResNet50(include_top=False, weights='imagenet', input_shape=(224, 224, 3))
-    x = model.output
-    x = Flatten()(x)
-    x = Dense(128, activation='relu')(x)
-    x = Dropout(0.25)(x)
-    x = Dense(64, activation='relu')(x)
-    x = Dense(int(classcount), activation='softmax', name='softmax')(x)
-    finalmodel = Model(inputs=model.input, output=x)
-    finalmodel.summary()
-    finalmodel.compile(optimizer=Nadam(lr=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
 
-    global classificationpath
-    classificationfilename = datetime.now().strftime('%Y%m%d%H%M%S') + '_classification.h5'
-    classificationpath = os.getcwd() + classificationpath + '\\' + classificationfilename
-    finalmodel.fit_generator(train_it, epochs=25, validation_data=val_it,
-                             callbacks=[keras.callbacks.ModelCheckpoint(classificationpath,
-                                                                        monitor='val_acc', save_best_only=True,
-                                                                        mode='max', period=1)])
+    max_accuracy = 0,
+    max_accuracy_pos = (0, 0, 0)
+    for lr in learning_rates:
+        for dropout in dropout_values:
+            for epoch in epoch_values:
+                x = model.output
+                x = Flatten()(x)
+                x = Dense(128, activation='relu')(x)
+                x = Dropout(dropout)(x)
+                x = Dense(64, activation='relu')(x)
+                x = Dense(int(classcount), activation='softmax', name='softmax')(x)
+                finalmodel = Model(inputs=model.input, output=x)
+                finalmodel.summary()
+                finalmodel.compile(optimizer=Nadam(lr=lr), loss='categorical_crossentropy', metrics=['accuracy'])
+
+                global classificationpath
+                classificationfilename = str(lr) + str(dropout) + str(epoch)\
+                                         + '_classification.h5'
+                classificationpath = os.getcwd() + classificationpath + '\\' + classificationfilename
+                finalmodel.fit_generator(train_it, epochs=epoch, validation_data=val_it,
+                                         callbacks=[keras.callbacks.ModelCheckpoint(classificationpath,
+                                                                                    monitor='val_acc', save_best_only=True,
+                                                                                    mode='max', period=1)])
+                #evaluate
+                scores = finalmodel.evaluate_generator(val_it)
+                accuracy = scores[1]*100
+                if accuracy > max_accuracy:
+                    max_accuracy = accuracy
+                    max_accuracy_pos = (lr, dropout, epoch)
 
     # cut the last classification layers
+    classificationfilename = str(max_accuracy_pos[0]) + str(max_accuracy_pos[1]) + str(max_accuracy_pos[2]) \
+                             + '_classification.h5'
+    classificationpath = os.getcwd() + classificationpath + '\\' + classificationfilename
     model = load_model(classificationpath)
     newmodel = Model(inputs=model.input, outputs=model.get_layer('conv5_block3_out').output)
     newmodel.summary()

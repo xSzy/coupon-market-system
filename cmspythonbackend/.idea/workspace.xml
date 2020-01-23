@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="150c5dc4-cc67-403e-a785-1e6719e6a4bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/service/impl/CouponServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../cms/src/main/java/com/ptit/cms/service/impl/CouponServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cms/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../cms/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainingService.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainingService.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -131,6 +132,16 @@
       <workItem from="1574750446700" duration="6163000" />
       <workItem from="1575032331486" duration="801000" />
       <workItem from="1575080765416" duration="2556000" />
+      <workItem from="1576382521811" duration="16000" />
+      <workItem from="1576382670541" duration="600000" />
+      <workItem from="1576408615388" duration="4346000" />
+      <workItem from="1576461782951" duration="1989000" />
+      <workItem from="1576503282694" duration="1803000" />
+      <workItem from="1577120234578" duration="3160000" />
+      <workItem from="1577283244828" duration="248000" />
+      <workItem from="1577283593265" duration="260000" />
+      <workItem from="1577322092992" duration="2283000" />
+      <workItem from="1577342094566" duration="1436000" />
     </task>
     <servers />
   </component>
